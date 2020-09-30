@@ -3,6 +3,8 @@
     background-color: #627082;
 }
 
-.header img {
-    width: 20px;
+.header img{
+    padding-left: 35px;
+    padding-top: 5px;
+    width: 50px;
 }
