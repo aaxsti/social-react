@@ -6,7 +6,7 @@ const Profile = () => {
     return (
         <div>
             <div>
-                <img src='https://klike.net/uploads/posts/2019-09/1568880410_2.jpg'/>
+                <img alt='' src='https://klike.net/uploads/posts/2019-09/1568880410_2.jpg'/>
             </div>
             <div>
                 Avatar + description

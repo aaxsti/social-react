@@ -5,19 +5,19 @@ const Navbar = () => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                Profile
+                <a href="/profile">Profile</a>
             </div>
             <div className={`${s.item} ${s.active}`}>
-                Messages
+                <a href="/dialogs">Messages</a>
             </div>
             <div className={s.item}>
-                News
+                <a href="/news">News</a>
             </div>
             <div className={s.item}>
-                Music
+                <a href="/music">Music</a>
             </div>
             <div className={s.item}>
-                Settings
+                <a href="/settings">Settings</a>
             </div>
         </nav>
     )
