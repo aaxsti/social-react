@@ -4,11 +4,15 @@
 }
 
 .item {
-    color: white;
     padding-top: 15px;
     padding-left: 35px;
 }
 
-.item.active {
+.item a {
+    color: white;
+    text-decoration: none;
+}
+
+.item a.activeLink {
     color: gold;
 }
