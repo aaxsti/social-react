@@ -2,27 +2,24 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
+
 
 const Dialogs = (props) => {
-
-    let state = props.store.getState().dialogsPage;
+    let state = props.dialogsPage;
 
     let dialogsElements = state.dialogs.map((d) => <DialogItem name={d.name} id={d.id} imgLink={d.imgLink}/>);
     let messagesElements = state.messages.map((m) => <Message message={m.message}/>);
-    let newMessageBody = state.newMessageBody;
 
     let newMessageElement = React.createRef();
 
     let onSendMessageClick = () => {
-        debugger;
-        props.store.dispatch(sendMessageCreator());
+        props.SendMessage();
     };
 
     let onNewMessageChange = (e) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body));
-    }
+        props.updateNewMessageBody(body);
+    };
 
     return (
         <div className={s.dialogs}>
@@ -35,7 +32,7 @@ const Dialogs = (props) => {
                     <textarea
                         placeholder='Enter your message'
                         onChange={onNewMessageChange}
-                        value={newMessageBody}
+                        value={state.newMessageBody}
                         ref={newMessageElement}/>
                 </div>
                 <div>
@@ -46,5 +43,5 @@ const Dialogs = (props) => {
     )
 };
 
-export default Dialogs;
 
+export default Dialogs;
