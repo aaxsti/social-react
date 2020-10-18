@@ -15,6 +15,7 @@ const Dialogs = (props) => {
     let newMessageElement = React.createRef();
 
     let onSendMessageClick = () => {
+        debugger;
         props.store.dispatch(sendMessageCreator());
     };
 
