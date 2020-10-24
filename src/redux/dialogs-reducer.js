@@ -14,24 +14,23 @@ let initialState = {
         {id: 4, name: 'Stas', imgLink: 'https://picsum.photos/80/80'},
         {id: 5, name: 'Sasha', imgLink: 'https://picsum.photos/90/90'},
     ],
-    newMessageBody: '',
+    newMessageBody: ''
 };
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY: {
-            let stateCopy = {...state};
-            stateCopy.newMessageBody = action.body;
-            return stateCopy;
-        }
-        case SEND_MESSAGE: {
-            let stateCopy = {...state};
+        case UPDATE_NEW_MESSAGE_BODY:
+            return {
+                ...state,
+                newMessageBody: action.body
+            };
+        case SEND_MESSAGE:
             let body = state.newMessageBody;
-            stateCopy.newMessageBody = '';
-            stateCopy.messages = [...state.messages];
-            stateCopy.messages.push({id: 6, message: body});
-            return stateCopy;
-        }
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 6, message: body}]
+            };
         default:
             return state;
     }
