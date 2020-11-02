@@ -1,35 +1,16 @@
 import React from "react";
 import s from './users.module.css';
+import * as axios from 'axios';
+import userPhoto from '../../assets/images/user.png';
+
 
 let Users = (props) => {
 
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                photoUrl: 'https://picsum.photos/400/400',
-                followed: false,
-                fullName: 'Maxim',
-                status: 'Yo bruh',
-                location: {city: 'Gomel', country: 'Belarus'}
-            },
-            {
-                id: 2,
-                photoUrl: 'https://picsum.photos/200/200',
-                followed: true,
-                fullName: 'Ilya',
-                status: 'I love rap',
-                location: {city: 'Kiev', country: 'Ukraine'}
-            },
-            {
-                id: 3,
-                photoUrl: 'https://picsum.photos/300/300',
-                followed: false,
-                fullName: 'Olga',
-                status: 'I love music art',
-                location: {city: 'Nizhniy Novgorod', country: 'Russia'}
-            }
-        ]);
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            console.log(response.data.items);
+            props.setUsers(response.data.items);
+        });
     }
 
     return (
@@ -37,7 +18,7 @@ let Users = (props) => {
             {props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photoUrl} className={s.userPhoto}/>
+                            <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
@@ -49,14 +30,14 @@ let Users = (props) => {
                                 }}>Follow</button>}
                         </div>
                     </span>
-                    <span>
+                <span>
                         <span>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
                         <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
                         </span>
                     </span>
             </div>)}
