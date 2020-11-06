@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./users.module.css";
 import userPhoto from "../../assets/images/user.png";
-import * as axios from "axios";
 import {authAPI} from "../../api/api";
+import {toggleFollowingProgressAC} from "../../redux/users-reducer";
 
 
 let Users = (props) => {
@@ -34,25 +34,28 @@ let Users = (props) => {
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
 
+                                    props.toggleFollowingProgress(true, u.id);
                                     authAPI.userUnfollow(u.id)
                                         .then(data => {
                                                 if (data.resultCode === 0) {
-                                                    props.follow(u.id);
+                                                    props.unfollow(u.id);
                                                 }
+                                            props.toggleFollowingProgress(false, u.id);
                                             }
                                         );
 
                                 }}>Unfollow</button>
 
-                                : <button onClick={() => {
-
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id);
                                     authAPI.userFollow(u.id)
                                         .then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.follow(u.id);
                                                 }
+                                            props.toggleFollowingProgress(false, u.id);
                                             }
                                         );
                                 }}>Follow</button>

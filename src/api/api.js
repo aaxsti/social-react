@@ -19,16 +19,15 @@ export const usersAPI = {
 };
 
 export const authAPI = {
-
     userFollow(id) {
         return instance.post(`follow/${id}`, {})
             .then(response => {
                 return response.data;
             });
     },
+
     userUnfollow(id) {
-        debugger;
-        return instance.delete(`follow/${id}`, {})
+        return instance.delete(`follow/${id}`)
             .then(response => {
                 return response.data;
             });
