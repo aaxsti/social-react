@@ -35,14 +35,13 @@ let Users = (props) => {
                         <div>
                             {u.followed
                                 ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-
                                     props.toggleFollowingProgress(true, u.id);
                                     authAPI.userUnfollow(u.id)
                                         .then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.unfollow(u.id);
                                                 }
-                                            props.toggleFollowingProgress(false, u.id);
+                                                props.toggleFollowingProgress(false, u.id);
                                             }
                                         );
 
@@ -55,7 +54,7 @@ let Users = (props) => {
                                                 if (data.resultCode === 0) {
                                                     props.follow(u.id);
                                                 }
-                                            props.toggleFollowingProgress(false, u.id);
+                                                props.toggleFollowingProgress(false, u.id);
                                             }
                                         );
                                 }}>Follow</button>
@@ -64,16 +63,17 @@ let Users = (props) => {
                         </div>
                     </span>
                     <span>
-                                    <span>
-                                    <div>{u.name}</div>
-                                    <div>{u.status}</div>
-                                    </span>
-                                    <span>
-                                    <div>{"u.location.country"}</div>
-                                    <div>{"u.location.city"}</div>
-                                    </span>
-                                    </span>
-                </div>)}
+                        <span>
+                            <div>{u.name}</div>
+                            <div>{u.status}</div>
+                        </span>
+                        <span>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
+                        </span>
+                    </span>
+                </div>
+            )}
         </div>
     )
 }
