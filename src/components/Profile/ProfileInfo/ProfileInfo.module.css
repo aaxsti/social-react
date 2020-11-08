@@ -1,3 +1,12 @@
 .descriptionBlock {
     padding: 10px;
 }
+
+.infoList {
+    list-style-type: none;
+}
+
+.workingImage {
+    width: 25px;
+    height: 25px;
+}

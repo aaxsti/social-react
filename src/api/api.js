@@ -15,7 +15,15 @@ export const usersAPI = {
             .then(response => {
                 return response.data;
             });
+    },
+
+    getUserProfile() {
+        return instance.get(`profile/2`)
+            .then(response => {
+                return response.data;
+            });
     }
+
 };
 
 export const authAPI = {
