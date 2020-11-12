@@ -17,21 +17,23 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-                <h3>My contacts:</h3>
-                <ul className={s.infoList}>
-                    <li>Facebook: {props.profile.contacts.facebook}</li>
-                    <li>VK: {props.profile.contacts.vk}</li>
-                    <li>Twitter: {props.profile.contacts.twitter}</li>
-                    <li>Instagram: {props.profile.contacts.instagram}</li>
-                    <li>Github: {props.profile.contacts.github}</li>
-                    <li></li>
-                </ul>
-                <h3>Job:</h3>
-                <ul className={s.infoList}>
-                    <li>Full name: {props.profile.fullName}</li>
-                    <li>Job: {props.profile.lookingForAJob ? <img src={working} className={s.workingImage}/> : null}</li>
-                    <li>Job preferences: {props.profile.lookingForAJobDescription}</li>
-                </ul>
+                <div className={s.profileInfo}>
+                    <h3>My contacts:</h3>
+                    <ul className={s.infoList}>
+                        <li>Facebook: {props.profile.contacts.facebook}</li>
+                        <li>VK: {props.profile.contacts.vk}</li>
+                        <li>Twitter: {props.profile.contacts.twitter}</li>
+                        <li>Instagram: {props.profile.contacts.instagram}</li>
+                        <li>Github: {props.profile.contacts.github}</li>
+                    </ul>
+                    <h3>Job:</h3>
+                    <ul className={s.infoList}>
+                        <li>Full name: {props.profile.fullName}</li>
+                        <li>Job: {props.profile.lookingForAJob ?
+                            <img src={working} className={s.workingImage}/> : null}</li>
+                        <li>Job preferences: {props.profile.lookingForAJobDescription}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     )
