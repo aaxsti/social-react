@@ -17,25 +17,31 @@ export const usersAPI = {
             });
     },
 
-    getUserProfile(userId) {
+    getProfile(userId) {
         return instance.get(`profile/${userId}`)
-            .then(response => {
-                return response.data;
-            });
-    }
-
-};
-
-export const authAPI = {
-    userFollow(id) {
-        return instance.post(`follow/${id}`, {})
             .then(response => {
                 return response.data;
             });
     },
 
-    userUnfollow(id) {
-        return instance.delete(`follow/${id}`)
+    userFollow(userId) {
+        return instance.post(`follow/${userId}`, {})
+            .then(response => {
+                return response.data;
+            });
+    },
+
+    userUnfollow(userId) {
+        return instance.delete(`follow/${userId}`)
+            .then(response => {
+                return response.data;
+            });
+    }
+};
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
             .then(response => {
                 return response.data;
             });
@@ -43,9 +49,4 @@ export const authAPI = {
 };
 
 
-export const getUser = () => {
-    return instance.get(`auth/me`)
-        .then(response => {
-            return response.data;
-        });
-}
+
