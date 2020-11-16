@@ -2,6 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import working from "../../../assets/images/working.png";
+import ProfileStatus from "./ProfileStatus"
 import noPhotoPic from "../../../assets/images/user.png";
 
 
@@ -18,11 +19,14 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.descriptionBlock}>
 
-                {   props.profile.photos.large != null ?
-                    <img src={props.profile.photos.large}/>
-                    : <img src={noPhotoPic} className={s.noPhotoPic}/> }
+                {/*{   props.profile.photos.large != null ?*/}
+                {/*    <img src={props.profile.photos.large}/>*/}
+                {/*    : <img src={noPhotoPic} className={s.noPhotoPic}/> }*/}
 
                 <div className={s.profileInfo}>
+
+                    <ProfileStatus status={"Hello my friends"}/>
+
                     <h3>My contacts:</h3>
                     <ul className={s.infoList}>
                         <li>Facebook: {props.profile.contacts.facebook}</li>
