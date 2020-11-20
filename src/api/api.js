@@ -48,6 +48,9 @@ export const profileAPI = {
 export const authAPI = {
     me() {
         return instance.get(`auth/me`);
+    },
+    login() {
+
     }
 };
 
