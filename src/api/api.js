@@ -50,7 +50,7 @@ export const authAPI = {
         return instance.get(`auth/me`);
     },
     login() {
-
+        return instance.post(`auth/login`);
     }
 };
 
