@@ -4,6 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import working from "../../../assets/images/working.png";
 import ProfileStatus from "./ProfileStatus"
 import noPhotoPic from "../../../assets/images/user.png";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 const ProfileInfo = (props) => {
@@ -25,7 +26,7 @@ const ProfileInfo = (props) => {
 
                 <div className={s.profileInfo}>
 
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
 
                     <h3>My contacts:</h3>
                     <ul className={s.infoList}>
