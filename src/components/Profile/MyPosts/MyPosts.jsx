@@ -5,6 +5,7 @@ import AddNewPostForm from "./AddNewPostForm/AddNewPostForm";
 
 
 const MyPosts = (props) => {
+
     let postsElements = props.posts.map((p) => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>);
 
     let addNewPost = (values) => {
@@ -21,8 +22,6 @@ const MyPosts = (props) => {
         </div>
     )
 }
-
-
 
 
 export default MyPosts;
