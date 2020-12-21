@@ -2,14 +2,13 @@ import React from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import working from "../../../assets/images/working.png";
-import ProfileStatus from "./ProfileStatus"
 import noPhotoPic from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({profile, status, updateStatus}) => {
 
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader/>
     }
     return (
@@ -19,28 +18,28 @@ const ProfileInfo = (props) => {
             {/*</div>*/}
             <div className={s.descriptionBlock}>
 
-                {/*{   props.profile.photos.large != null ?*/}
-                {/*    <img src={props.profile.photos.large}/>*/}
-                {/*    : <img src={noPhotoPic} className={s.noPhotoPic}/> }*/}
+                {profile.photos.large != null ?
+                    <img src={profile.photos.large}/>
+                    : <img src={noPhotoPic} className={s.noPhotoPic}/>}
 
                 <div className={s.profileInfo}>
 
-                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
 
                     <h3>My contacts:</h3>
                     <ul className={s.infoList}>
-                        <li>Facebook: {props.profile.contacts.facebook}</li>
-                        <li>VK: {props.profile.contacts.vk}</li>
-                        <li>Twitter: {props.profile.contacts.twitter}</li>
-                        <li>Instagram: {props.profile.contacts.instagram}</li>
-                        <li>Github: {props.profile.contacts.github}</li>
+                        <li>Facebook: {profile.contacts.facebook}</li>
+                        <li>VK: {profile.contacts.vk}</li>
+                        <li>Twitter: {profile.contacts.twitter}</li>
+                        <li>Instagram: {profile.contacts.instagram}</li>
+                        <li>Github: {profile.contacts.github}</li>
                     </ul>
                     <h3>Job:</h3>
                     <ul className={s.infoList}>
-                        <li>Full name: {props.profile.fullName}</li>
-                        <li>Job: {props.profile.lookingForAJob ?
+                        <li>Full name: {profile.fullName}</li>
+                        <li>Job: {profile.lookingForAJob ?
                             <img src={working} className={s.workingImage}/> : null}</li>
-                        <li>Job preferences: {props.profile.lookingForAJobDescription}</li>
+                        <li>Job preferences: {profile.lookingForAJobDescription}</li>
                     </ul>
                 </div>
             </div>
