@@ -16,7 +16,6 @@ import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
 
-
 class App extends React.Component {
 
     componentDidMount() {
@@ -29,7 +28,6 @@ class App extends React.Component {
         }
 
         return (
-
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <Navbar/>
@@ -51,7 +49,6 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 });
-
 
 let AppContainer = compose(
     withRouter,
