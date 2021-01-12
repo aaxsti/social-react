@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {withRouter, Route, BrowserRouter} from "react-router-dom";
+import {withRouter, Route, HashRouter} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -62,11 +62,11 @@ let AppContainer = compose(
 
 const SocialNetworkApp = (props) => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 

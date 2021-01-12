@@ -26,7 +26,7 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
 
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
 
-                    <h3>My contacts:</h3>
+                    <h3>Contacts:</h3>
                     <ul className={s.infoList}>
                         <li>Facebook: {profile.contacts.facebook}</li>
                         <li>VK: {profile.contacts.vk}</li>
