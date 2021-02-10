@@ -6,11 +6,18 @@ import noPhotoPic from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
 
     if (!profile) {
         return <Preloader/>
     }
+
+    const onMainPhotoSelected = (e) => {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
+    }
+
     return (
         <div>
             {/*<div>*/}
@@ -18,9 +25,10 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
             {/*</div>*/}
             <div className={s.descriptionBlock}>
 
-                {profile.photos.large != null ?
-                    <img src={profile.photos.large}/>
-                    : <img src={noPhotoPic} className={s.noPhotoPic}/>}
+
+                <img src={profile.photos.large || noPhotoPic} className={s.mainPhoto}/>
+                {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
+
 
                 <div className={s.profileInfo}>
 
