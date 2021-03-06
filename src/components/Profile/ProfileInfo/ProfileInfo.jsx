@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import working from "../../../assets/images/working.png";
 import noPhotoPic from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileDataForm from "./ProfileDataForm";
 
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
+
+    let [editMode, setEditMode] = useState(false);
 
     if (!profile) {
         return <Preloader/>
@@ -18,6 +21,12 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
         }
     }
 
+    const onSubmit = (formData) => {
+        saveProfile(formData).then(() => {
+            setEditMode(false);
+        });
+    }
+
     return (
         <div>
             {/*<div>*/}
@@ -25,35 +34,59 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
             {/*</div>*/}
             <div className={s.descriptionBlock}>
 
-
                 <img src={profile.photos.large || noPhotoPic} className={s.mainPhoto}/>
-                {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
+                {isOwner && <input type={"file"} onChange={onMainPhotoSelected} className={s.inputPhotoButton}/>}
 
+                <br/>
+                {editMode
+                    ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
+                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
+                        setEditMode(true)
+                    }}/>}
 
-                <div className={s.profileInfo}>
-
-                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-
-                    <h3>Contacts:</h3>
-                    <ul className={s.infoList}>
-                        <li>Facebook: {profile.contacts.facebook}</li>
-                        <li>VK: {profile.contacts.vk}</li>
-                        <li>Twitter: {profile.contacts.twitter}</li>
-                        <li>Instagram: {profile.contacts.instagram}</li>
-                        <li>Github: {profile.contacts.github}</li>
-                    </ul>
-                    <h3>Job:</h3>
-                    <ul className={s.infoList}>
-                        <li>Full name: {profile.fullName}</li>
-                        <li>Job: {profile.lookingForAJob ?
-                            <img src={working} className={s.workingImage}/> : null}</li>
-                        <li>Job preferences: {profile.lookingForAJobDescription}</li>
-                    </ul>
-                </div>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     )
 };
 
+const ProfileData = ({profile, isOwner, goToEditMode}) => {
+    return (
+        <div className={s.profileInfo}>
+            {isOwner ? <div>
+                <button onClick={goToEditMode}>Edit</button>
+            </div> : null}
+            <div>
+                <div>
+                    <b>Full name</b> {profile.fullName}
+                </div>
+                <div>
+                    <b>Looking for a job</b> {profile.lookingForAJob ? "yes" : "no"}
+                </div>
+                {profile.lookingForAJob &&
+                <div>
+                    <b>My professional skills</b>: {profile.lookingForAJobDescription}
+                </div>
+                }
+                <div>
+                    <b>About me:</b> {profile.aboutMe}
+                </div>
+                <div>
+                    <b>Contacts</b> {Object.keys(profile.contacts).map(key => {
+                    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                })}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const Contact = ({contactTitle, contactValue}) => {
+    return (
+        <div className={s.contact}>
+            <b>{contactTitle}:</b> {contactValue}
+        </div>
+    )
+}
 
 export default ProfileInfo;

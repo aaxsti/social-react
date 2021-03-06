@@ -18,3 +18,11 @@
 .mainPhoto {
     max-width: 200px;
 }
+
+.inputPhotoButton {
+    display: block;
+}
+
+.contact {
+    padding-left: 10px;
+}
