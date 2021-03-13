@@ -29,9 +29,7 @@ class App extends React.Component {
 
     componentDidMount() {
         this.props.initializeApp();
-
-        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
-
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     componentWillUnmount() {
@@ -54,7 +52,7 @@ class App extends React.Component {
                         <Route path='/dialogs'
                                render={withSuspense(DialogsContainer)}/>
                         <Route path='/news' render={() => <News/>}/>
-                        <Route path='/music' render={() => <Music/>}/>
+                        {/*<Route path='/music' render={() => <Music/>}/>*/}
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/login' render={() => <Login/>}/>
