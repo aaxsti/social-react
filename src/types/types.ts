@@ -27,6 +27,7 @@ export type ProfileType = {
     contacts: ContactsType
 }
 export type UserType = {
+    followed?: boolean
     id: number
     name: string
     status: string

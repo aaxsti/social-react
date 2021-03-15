@@ -4,15 +4,13 @@ import {createField, Input} from "../../common/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/validators";
 import React from "react";
 
-export const LoginForm = ({handleSubmit, error, captchaUrl}) => {
+
+export const LoginForm = ({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             {createField("Email", "email", [required], Input)}
             {createField("Password", "password", [required], Input, {type: "password"})}
             {createField(null, "remember me", [], Input, {type: "checkbox"}, "Remember me")}
-
-            {captchaUrl && <img src={captchaUrl}/>}
-            {captchaUrl && createField("Symbols from image", "captcha", [required], Input)}
 
             {error &&
             <div className={style.formSummeryError}>

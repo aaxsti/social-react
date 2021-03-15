@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import AddNewPostForm from "./AddNewPostForm/AddNewPostForm";
+import {PostType} from "../../../types/types";
 
+type PropsType = {
+    posts: Array<PostType>
+    addPost: (value: string) => void
 
-const MyPosts = (props) => {
+}
 
-    let postsElements = props.posts.map((p) => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>);
+const MyPosts: FC<PropsType> = ({posts, addPost}) => {
 
-    let addNewPost = (values) => {
-        props.addPost(values.newPostText);
+    let postsElements = posts.map((p) => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>);
+
+    let addNewPost = (values: any) => {
+        addPost(values.newPostText);
     };
 
     return (
@@ -22,6 +28,5 @@ const MyPosts = (props) => {
         </div>
     )
 }
-
 
 export default MyPosts;

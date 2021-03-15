@@ -7,7 +7,7 @@ import {compose} from "redux";
 
 let mapStateToProps = (state) => {
     return {
-        dialogsPage: state.dialogsPage,
+        dialogsPage: state.dialogsPage
     }
 };
 
@@ -19,8 +19,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect
+    (mapStateToProps, mapDispatchToProps),
     withAuthRedirect
 )(Dialogs);

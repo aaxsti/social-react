@@ -4,7 +4,6 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
 
-
 const Dialogs = (props) => {
     let state = props.dialogsPage;
 
@@ -28,6 +27,5 @@ const Dialogs = (props) => {
         </div>
     )
 };
-
 
 export default Dialogs;

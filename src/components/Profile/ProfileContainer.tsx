@@ -2,15 +2,40 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from 'react-redux';
 import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from "../../redux/profile-reducer";
-import {withRouter} from "react-router-dom";
+import {withRouter, RouteComponentProps} from "react-router-dom";
 import {compose} from "redux";
+import {AppStateType} from "../../redux/redux-store";
+import {ProfileType} from "../../types/types";
 
-class ProfileContainer extends React.Component {
+interface RouterProps {
+    userId: string | undefined
+}
+
+type MapStatePropsType = {
+    authorizedUserId: number | null
+    profile: ProfileType | null
+    status: string
+    isAuth: boolean
+}
+
+type MapDispatchPropsType = {
+    getUserProfile: (userId: any) => void
+    getStatus: (userId: any) => void
+    updateStatus: () => void
+    savePhoto: () => void
+    saveProfile: () => void
+}
+
+interface OwnPropsType extends RouteComponentProps<RouterProps> {}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
+
+class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = this.props.authorizedUserId;
+            userId = String(this.props.authorizedUserId);
             if (!userId) {
                 this.props.history.push("/login");
             }
@@ -23,7 +48,7 @@ class ProfileContainer extends React.Component {
         this.refreshProfile();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps: PropsType , prevState: MapStatePropsType) {
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile();
         }
@@ -41,7 +66,7 @@ class ProfileContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return ({
         profile: state.profilePage.profile,
         status: state.profilePage.status,

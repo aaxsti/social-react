@@ -3,7 +3,6 @@ import './App.css';
 import {withRouter, Route, BrowserRouter, Switch, Redirect} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
-import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -21,6 +20,7 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 class App extends React.Component {
+
     catchAllUnhandledErrors = (reason, promise) => {
         //dispatch thunk of global error
         alert("some error occured");
@@ -52,9 +52,8 @@ class App extends React.Component {
                         <Route path='/dialogs'
                                render={withSuspense(DialogsContainer)}/>
                         <Route path='/news' render={() => <News/>}/>
-                        {/*<Route path='/music' render={() => <Music/>}/>*/}
                         <Route path='/settings' render={() => <Settings/>}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/users' render={() => <UsersContainer pageTitle={"Users"}/>}/>
                         <Route path='/login' render={() => <Login/>}/>
 
                         <Redirect exact from="/" to="/profile"/>
