@@ -6,7 +6,6 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-// import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Login from "./components/Login/Login";
 import {compose} from "redux";
 import {connect, Provider} from "react-redux";
@@ -55,10 +54,8 @@ class App extends React.Component {
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/users' render={() => <UsersContainer pageTitle={"Users"}/>}/>
                         <Route path='/login' render={() => <Login/>}/>
-
                         <Redirect exact from="/" to="/profile"/>
                         <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
-
                     </Switch>
                 </div>
             </div>
