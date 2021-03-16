@@ -1,6 +1,6 @@
-import {authAPI, securityAPI} from "../api/api";
+import {authAPI, ResultCodeForCaptcha, ResultCodesEnum, securityAPI} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
-import { ThunkAction } from "redux-thunk";
+import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 
 const SET_USER_DATA = 'social-network/auth/SET_USER_DATA';
@@ -56,22 +56,24 @@ type ActionsTypes = SetAuthUserDataActionType | GetCaptchaUrlSuccessType | FormA
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 export const getAuthUserData = (): ThunkType => async (dispatch, getState) => {
-    let response = await authAPI.me();
-    if (response.data.resultCode === 0) {
-        let {id, login, email} = response.data.data;
+    let meData = await authAPI.me();
+
+    if (meData.resultCode === ResultCodesEnum.Success) {
+        let {id, login, email} = meData.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
 }
 
-export const login = (email: string, password: string , rememberMe: boolean, captcha: string): ThunkType => async (dispatch, setState) => {
-    let response = await authAPI.login(email, password, rememberMe, captcha);
-    if (response.data.resultCode === 0) {
+export const login = (email: string, password: string , rememberMe: boolean): ThunkType => async (dispatch, setState) => {
+    let data = await authAPI.login(email, password, rememberMe);
+
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData());
     } else {
-        if (response.data.resultCode === 10) {
+        if (data.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
             dispatch(getCaptchaUrl());
         }
-        let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+        let message = data.messages.length > 0 ? data.messages[0] : "Some error";
         dispatch(stopSubmit("login", {_error: message}));
     }
 }
