@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import LoginForm from "./LoginForm/LoginForm";
+import LoginForm, {LoginFormValuesType} from "./LoginForm/LoginForm";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
@@ -10,18 +10,14 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+    login: (email: string, password: string, rememberMe: boolean) => void
 }
 
-type OwnPropsType = {
-
-}
-
-type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
+type PropsType = MapStatePropsType & MapDispatchPropsType;
 
 const Login: FC<PropsType> = ({login, isAuth}) => {
-    const onSubmit = (formData: any) => {
-        login(formData.email, formData.password, formData.rememberMe, formData.captcha);
+    const onSubmit = (formData: LoginFormValuesType) => {
+        login(formData.email, formData.password, formData.rememberMe);
     }
 
     if (isAuth) {
@@ -40,5 +36,5 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth
 })
 
-export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>
+export default connect<MapStatePropsType, MapDispatchPropsType, any, AppStateType>
 (mapStateToProps, {login})(Login)
