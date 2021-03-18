@@ -2,8 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {
     follow,
-    setCurrentPage,
-    toggleFollowingProgress,
     unfollow,
     requestUsers
 } from '../../redux/users-reducer';
