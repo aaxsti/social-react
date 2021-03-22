@@ -1,6 +1,5 @@
-import profileReducer, {addPostActionCreator, deletePost, setStatus} from "./profile-reducer";
-import React from "react";
-
+import profileReducer, {actions} from "./profile-reducer";
+import {ProfileType} from "../types/types";
 
 let state = {
     posts: [
@@ -8,13 +7,16 @@ let state = {
         {id: 2, message: 'Это мой первый пост', likesCount: 15},
         {id: 3, message: 'Куку', likesCount: 15},
         {id: 4, message: 'Че как?', likesCount: 15},
-    ]
+    ],
+    profile: null,
+    status: '',
+    newPostText: ''
 };
 
 it('length of posts should be incremented', () => {
 
     // 1. test data
-    let action = addPostActionCreator("Maxon");
+    let action = actions.addPostActionCreator("Maxon");
 
     // 2. action
     let newState = profileReducer(state, action);
@@ -26,7 +28,7 @@ it('length of posts should be incremented', () => {
 it('message of new posts should be correct', () => {
 
     // 1. test data
-    let action = addPostActionCreator("Maxon");
+    let action = actions.addPostActionCreator("Maxon");
 
     // 2. action
     let newState = profileReducer(state, action);
@@ -38,7 +40,7 @@ it('message of new posts should be correct', () => {
 it('after deleting length of messages should be decremented', () => {
 
     // 1. test data
-    let action = deletePost(1);
+    let action = actions.deletePost(1);
 
     // 2. action
     let newState = profileReducer(state, action);
@@ -50,7 +52,7 @@ it('after deleting length of messages should be decremented', () => {
 it(`after deleting length shouldn't be decremented if id is incorrect`, () => {
 
     // 1. test data
-    let action = deletePost(1000);
+    let action = actions.deletePost(1000);
 
     // 2. action
     let newState = profileReducer(state, action);
@@ -62,7 +64,7 @@ it(`after deleting length shouldn't be decremented if id is incorrect`, () => {
 it(`status of profile should be correct`, () => {
 
     // 1. test data
-    let action = setStatus('hello people!');
+    let action = actions.setStatus('hello people!');
 
     // 2. action
     let newState = profileReducer(state, action);

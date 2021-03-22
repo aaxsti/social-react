@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import LoginForm, {LoginFormValuesType} from "./LoginForm/LoginForm";
+import LoginForm from "./LoginForm/LoginForm";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
@@ -14,6 +14,16 @@ type MapDispatchPropsType = {
 }
 
 type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+export type LoginFormOwnProps = {
+    // captchaUrl: string
+}
+
+export type LoginFormValuesType = {
+    rememberMe: boolean
+    password: string
+    email: string
+}
 
 const Login: FC<PropsType> = ({login, isAuth}) => {
     const onSubmit = (formData: LoginFormValuesType) => {

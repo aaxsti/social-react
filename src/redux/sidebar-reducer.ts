@@ -1,4 +1,6 @@
 import {FriendType} from "../types/types";
+import {InferActionsTypes} from "./redux-store";
+import {actions} from "./profile-reducer";
 
 let initialState = {
     friends: [
@@ -8,10 +10,11 @@ let initialState = {
     ] as Array<FriendType>,
 }
 
-export type InitialStateType = typeof initialState
-
-const sidebarReducer = (state = initialState, action: any) => {
+const sidebarReducer = (state = initialState, action: ActionsType): InitialStateType => {
     return state;
 }
 
 export default sidebarReducer;
+
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>

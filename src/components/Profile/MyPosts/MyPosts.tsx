@@ -1,20 +1,22 @@
 import React, {FC} from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import AddNewPostForm from "./AddNewPostForm/AddNewPostForm";
+import AddNewPostForm, {AddPostFormValuesType} from "./AddNewPostForm/AddNewPostForm";
 import {PostType} from "../../../types/types";
 
-type PropsType = {
+export type MapPropsType = {
     posts: Array<PostType>
-    addPost: (value: string) => void
-
 }
 
-const MyPosts: FC<PropsType> = ({posts, addPost}) => {
+export type DispatchPropsType = {
+    addPost: (newPostText: string) => void
+}
 
-    let postsElements = posts.map((p) => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>);
+const MyPosts: FC<MapPropsType & DispatchPropsType> = ({posts, addPost}) => {
 
-    let addNewPost = (values: any) => {
+    let postsElements = posts.reverse().map((p) => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>);
+
+    let addNewPost = (values: AddPostFormValuesType) => {
         addPost(values.newPostText);
     };
 
@@ -29,4 +31,6 @@ const MyPosts: FC<PropsType> = ({posts, addPost}) => {
     )
 }
 
-export default MyPosts;
+const MyPostsMemorized = React.memo(MyPosts)
+
+export default MyPostsMemorized

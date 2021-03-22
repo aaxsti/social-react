@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType, FC} from 'react';
 import './App.css';
 import {withRouter, Route, BrowserRouter, Switch, Redirect} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -11,18 +11,25 @@ import {compose} from "redux";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
-import store from "./redux/redux-store";
+import store, {AppStateType} from "./redux/redux-store";
 import withSuspense from "./hoc/withSuspense";
-
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
-class App extends React.Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+    initializeApp: () => void
+}
 
-    catchAllUnhandledErrors = (reason, promise) => {
+const SuspendedDialogs = withSuspense(DialogsContainer);
+const SuspendedProfile = withSuspense(ProfileContainer);
+
+class App extends React.Component<MapPropsType & DispatchPropsType> {
+
+    catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
         //dispatch thunk of global error
-        alert("some error occured");
+        alert("Some error occured");
         // console.error(promiseRejectionEvent);
     }
 
@@ -46,15 +53,15 @@ class App extends React.Component {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Switch>
-                        <Route path='/profile/:userId?'
-                               render={withSuspense(ProfileContainer)}/>
-                        <Route path='/dialogs'
-                               render={withSuspense(DialogsContainer)}/>
+                        <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+
+                        <Route path='/profile/:userId?' render={() => <SuspendedProfile/>}/>
+                        <Route path='/dialogs' render={() => <SuspendedDialogs/>}/>
                         <Route path='/news' render={() => <News/>}/>
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/users' render={() => <UsersContainer pageTitle={"Users"}/>}/>
                         <Route path='/login' render={() => <Login/>}/>
-                        <Redirect exact from="/" to="/profile"/>
+
                         <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
                     </Switch>
                 </div>
@@ -63,15 +70,15 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 });
 
-let AppContainer = compose(
+let AppContainer = compose<ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App);
 
-const SocialNetworkApp = (props) => {
+const SocialNetworkApp: FC = () => {
     return (
         <BrowserRouter>
             <Provider store={store}>

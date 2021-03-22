@@ -1,21 +1,11 @@
 import {InjectedFormProps, reduxForm} from "redux-form";
 import style from "../../common/FormsControls/FormsControls.module.css";
-import {createField, Input} from "../../common/FormsControls/FormsControls";
+import {createField, GetStringKeys, Input} from "../../common/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/validators";
 import React, {FC} from "react";
+import {LoginFormOwnProps, LoginFormValuesType } from "../Login";
 
-
-export type LoginFormOwnProps = {
-    // captchaUrl: string
-}
-
-export type LoginFormValuesType = {
-    rememberMe: boolean
-    password: string
-    email: string
-}
-
-type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>;
+type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>;
 
 export const LoginForm: FC<InjectedFormProps<LoginFormValuesType & LoginFormOwnProps> & LoginFormOwnProps> =
     ({handleSubmit, error}) => {
