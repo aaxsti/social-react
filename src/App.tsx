@@ -1,12 +1,12 @@
 import React, {ComponentType, FC} from 'react';
 import './App.css';
-import {withRouter, Route, BrowserRouter, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import UsersContainer from "./components/Users/UsersContainer";
+import {UsersPage} from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import {LoginPage} from "./components/Login/LoginPage";
 import {compose} from "redux";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
@@ -59,8 +59,8 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                         <Route path='/dialogs' render={() => <SuspendedDialogs/>}/>
                         <Route path='/news' render={() => <News/>}/>
                         <Route path='/settings' render={() => <Settings/>}/>
-                        <Route path='/users' render={() => <UsersContainer pageTitle={"Users"}/>}/>
-                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='/users' render={() => <UsersPage pageTitle={"Users"}/>}/>
+                        <Route path='/login' render={() => <LoginPage/>}/>
 
                         <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
                     </Switch>

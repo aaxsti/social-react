@@ -3,7 +3,7 @@ import style from "../../common/FormsControls/FormsControls.module.css";
 import {createField, GetStringKeys, Input} from "../../common/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/validators";
 import React, {FC} from "react";
-import {LoginFormOwnProps, LoginFormValuesType } from "../Login";
+import {LoginFormOwnProps, LoginFormValuesType } from "../LoginPage";
 
 type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>;
 
