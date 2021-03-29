@@ -1,29 +1,51 @@
 import React, {FC} from 'react';
-import s from './Header.module.css'
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {Avatar, Button, Col, Layout, Menu, Row} from "antd";
+import {UserOutlined} from "@ant-design/icons";
+import {useDispatch, useSelector} from "react-redux";
+import {selectCurrentUserLogin, selectIsAuth} from "../../redux/auth-selectors";
+import {logout} from "../../redux/auth-reducer";
 
-export type MapPropsType = {
-    isAuth: boolean
-    login: string | null
-}
+export type MapPropsType = {}
 
-export type DispatchPropsType = {
-    logout: () => void
-}
+const Header: FC<MapPropsType> = (props) => {
 
-const Header:FC<MapPropsType & DispatchPropsType> = ({isAuth, login, logout}) => {
+    const isAuth = useSelector(selectIsAuth)
+    const login = useSelector(selectCurrentUserLogin)
+
+    const dispatch = useDispatch()
+
+    const logoutCallback = () => {
+        dispatch(logout())
+    }
+
+    const {Header} = Layout;
+
     return (
-        <header className={s.header}>
-            <img alt=''
-                 src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRUcUCuXMald5MexzWYz8GwZAu-vqSr0JZOFw&usqp=CAU'/>
-
-            <div className={s.loginBlock}>
+        <Header className="header">
+            <Row>
+                <Col span={18}>
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                        <Menu.Item key="1"><Link to="/users">Пользователи</Link></Menu.Item>
+                    </Menu>
+                </Col>
                 {isAuth
-                    ? <div>{login} <button onClick={logout}>Log out</button></div>
-                    : <NavLink to={'/login'}>Login</NavLink>
+                    ? <>
+                        <Col span={1}>
+                            <Avatar style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}/>
+                        </Col>
+                        <Col span={5}>
+                            <Button onClick={logoutCallback}>Log out</Button>
+                        </Col>
+                    </>
+                    : <Col span={6}>
+                        <Button>
+                            <Link to={'/login'}>Login</Link>
+                        </Button>
+                    </Col>
                 }
-            </div>
-        </header>
+            </Row>
+        </Header>
     )
 };
 

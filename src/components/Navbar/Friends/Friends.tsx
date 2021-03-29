@@ -1,13 +1,15 @@
 import React, {FC} from 'react';
 import s from './Friends.module.css'
 import Friend from "./Friend/Friend";
-import {FriendType} from "../../../types/types";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../redux/redux-store";
 
-type PropsType = {
-    friends: Array<FriendType>
-}
+type PropsType = {}
 
-const Friends: FC<PropsType> = ({friends}) => {
+const Friends: FC<PropsType> = (props) => {
+
+    const friends = useSelector((state: AppStateType) => state.sidebar.friends)
+
     let friendElements = friends.map((f) => <Friend name={f.name} key={f.id} imgLink={f.imgLink}/>);
 
     return (
