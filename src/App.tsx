@@ -29,7 +29,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
 
     catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
         //dispatch thunk of global error
-        alert("Some error occured");
+        alert("Some error occurred");
         // console.error(promiseRejectionEvent);
     }
 
