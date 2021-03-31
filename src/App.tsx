@@ -2,7 +2,6 @@ import React, {ComponentType, FC} from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 import {Breadcrumb, Layout, Menu} from 'antd';
-import {LaptopOutlined, UserOutlined} from '@ant-design/icons';
 import {BrowserRouter, Link, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
@@ -16,28 +15,20 @@ import store, {AppStateType} from "./redux/redux-store";
 import withSuspense from "./hoc/withSuspense";
 import Header from "./components/Header/Header";
 
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'))
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
     initializeApp: () => void
 }
 
-const SuspendedDialogs = withSuspense(DialogsContainer);
-const SuspendedProfile = withSuspense(ProfileContainer);
+const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedProfile = withSuspense(ProfileContainer)
+const SuspendedChatPage = withSuspense(ChatPage)
 
 class App extends React.Component<MapPropsType & DispatchPropsType> {
-
-    state = {
-        collapsed: false,
-    };
-
-    onCollapse = (collapsed: boolean) => {
-        console.log(collapsed);
-        this.setState({collapsed});
-    };
-
 
     catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
         //dispatch thunk of global error
@@ -60,7 +51,6 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
             return <Preloader/>
         }
 
-        const {SubMenu} = Menu;
         const {Content, Footer, Sider} = Layout;
 
         return (
@@ -81,18 +71,12 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                 // defaultOpenKeys={['sub1']}
                                 style={{height: '100%'}}
                             >
-                                <SubMenu key="sub1" icon={<UserOutlined/>} title="Мой профиль">
-                                    <Menu.Item key="1"><Link to="/profile">Моя страница</Link></Menu.Item>
-                                    <Menu.Item key="2"><Link to="/dialogs">Мессенджер</Link></Menu.Item>
-                                    <Menu.Item key="3">option3</Menu.Item>
-                                    <Menu.Item key="4">option4</Menu.Item>
-                                </SubMenu>
-                                <SubMenu key="sub2" icon={<LaptopOutlined/>} title="Пользователи">
-                                    <Menu.Item key="5"><Link to="/users">Поиск</Link></Menu.Item>
-                                    <Menu.Item key="6">option6</Menu.Item>
-                                    <Menu.Item key="7">option7</Menu.Item>
-                                    <Menu.Item key="8">option8</Menu.Item>
-                                </SubMenu>
+                                <Menu.Item key="1"><Link to="/profile">Моя страница</Link></Menu.Item>
+                                <Menu.Item key="2"><Link to="/dialogs">Мессенджер</Link></Menu.Item>
+                                <Menu.Item key="3"><Link to="/news">Новоости</Link></Menu.Item>
+                                <Menu.Item key="4"><Link to="/users">Пользователи</Link></Menu.Item>
+                                <Menu.Item key="5"><Link to="/settings">Настройки</Link></Menu.Item>
+                                <Menu.Item key="6"><Link to="/chat">Мессенджер (Чат)</Link></Menu.Item>
                             </Menu>
                         </Sider>
                         <Content style={{padding: '0 24px', minHeight: 280}}>
@@ -105,6 +89,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                 <Route path='/settings' render={() => <Settings/>}/>
                                 <Route path='/users' render={() => <UsersPage pageTitle={"Users"}/>}/>
                                 <Route path='/login' render={() => <LoginPage/>}/>
+                                <Route path='/chat' render={() => <SuspendedChatPage/>}/>
 
                                 <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
                             </Switch>

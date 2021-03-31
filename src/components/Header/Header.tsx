@@ -12,14 +12,13 @@ const Header: FC<MapPropsType> = (props) => {
 
     const isAuth = useSelector(selectIsAuth)
     const login = useSelector(selectCurrentUserLogin)
-
     const dispatch = useDispatch()
+
+    const {Header} = Layout;
 
     const logoutCallback = () => {
         dispatch(logout())
     }
-
-    const {Header} = Layout;
 
     return (
         <Header className="header">
