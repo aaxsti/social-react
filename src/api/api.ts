@@ -9,6 +9,8 @@ export const instance = axios.create({
     }
 });
 
+// 6a3eaab1-e015-4834-8a3d-4dbe63a05c04 - aaxsti
+
 export type APIResponseType<D = {}, RC = ResultCodesEnum> = {
     data: D
     messages: Array<string>

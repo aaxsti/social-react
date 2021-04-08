@@ -72,7 +72,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                 style={{height: '100%'}}
                             >
                                 <Menu.Item key="1"><Link to="/profile">Моя страница</Link></Menu.Item>
-                                <Menu.Item key="2"><Link to="/dialogs">Мессенджер</Link></Menu.Item>
+                                {/*<Menu.Item key="2"><Link to="/dialogs">Мессенджер</Link></Menu.Item>*/}
                                 <Menu.Item key="3"><Link to="/news">Новоости</Link></Menu.Item>
                                 <Menu.Item key="4"><Link to="/users">Пользователи</Link></Menu.Item>
                                 <Menu.Item key="5"><Link to="/settings">Настройки</Link></Menu.Item>
@@ -91,7 +91,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                 <Route path='/login' render={() => <LoginPage/>}/>
                                 <Route path='/chat' render={() => <SuspendedChatPage/>}/>
 
-                                <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                                {/*<Route path='*' render={() => <div>404 NOT FOUND</div>}/>*/}
                             </Switch>
                         </Content>
                     </Layout>
@@ -112,7 +112,7 @@ let AppContainer = compose<ComponentType>(
 
 const SocialNetworkApp: FC = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
