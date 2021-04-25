@@ -2,6 +2,7 @@ import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, GetStringKeys, Textarea} from "../../../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../../../utils/validators/validators";
 import React, {FC} from "react";
+import {Button, Form} from "antd";
 
 const maxLength400 = maxLengthCreator(400);
 
@@ -14,14 +15,18 @@ type AddPostFormValuesKeysType = GetStringKeys<AddPostFormValuesType>
 
 export const AddNewPostForm: FC<InjectedFormProps<AddPostFormValuesType & PropsType> & PropsType> = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                {createField<AddPostFormValuesKeysType>('Write your post', 'newPostText', [required, maxLength400], Textarea)}
-            </div>
-            <div>
-                <button>Add post</button>
-            </div>
-        </form>
+        <div style={{width: '400px', maxWidth: '400px', overflowY: 'auto'}}>
+            <form onSubmit={props.handleSubmit}>
+                <div>
+                    {createField<AddPostFormValuesKeysType>('Что у вас нового?', 'newPostText', [required, maxLength400], Textarea)}
+                </div>
+                <br/>
+                <div>
+                   <Button htmlType="submit">Опубликовать</Button>
+
+                </div>
+            </form>
+        </div>
     )
 }
 

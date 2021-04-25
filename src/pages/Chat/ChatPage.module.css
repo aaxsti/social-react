@@ -1,0 +1,18 @@
+.dialogImage {
+    border-radius: 40px;
+    width: 50px
+}
+
+.dialogName {
+    font-size: 14px;
+    padding: 13px 0 0 15px
+}
+
+.dialogElement {
+    padding-bottom: 20px;
+}
+
+.dialogsBlock {
+    padding-top: 10px;
+    padding-right: 60px;
+}

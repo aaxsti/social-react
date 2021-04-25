@@ -4,9 +4,7 @@ import Preloader from "../common/Preloader/Preloader";
 import {getIsFetching} from "../../redux/users-selectors";
 import {Users} from "./Users";
 
-type UsersPagePropsType = {
-    pageTitle: string
-}
+type UsersPagePropsType = {}
 
 export const UsersPage: FC<UsersPagePropsType> = (props) => {
 
@@ -14,7 +12,6 @@ export const UsersPage: FC<UsersPagePropsType> = (props) => {
 
     return <>
         {/*Code line down causes bad preloading look!*/}
-        <h2>{props.pageTitle}</h2>
         {isFetching ? <Preloader/> : null}
         <Users />
     </>

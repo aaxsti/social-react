@@ -29,7 +29,7 @@ export const LoginPage: FC = () => {
 
     return (
         <div>
-            <h1>Login</h1>
+            <h1>Войти</h1>
             <LoginForm onSubmit={onSubmit}/>
         </div>
     )

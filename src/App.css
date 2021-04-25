@@ -13,3 +13,18 @@
 /*    grid-area: c;*/
 /*    background-color: #e7f0ff;*/
 /*}*/
+
+/*.background-picture {*/
+/*    background: url('logo.svg')*/
+/*}*/
+
+.scroll-up-button {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 3px;
+    background-color: #1088e9;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+}

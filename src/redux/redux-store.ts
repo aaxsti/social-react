@@ -1,23 +1,26 @@
 import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form';
 import appReducer from "./app-reducer";
 import chatReducer from "./chat-reducer";
+import newsReducer from "./news-reducer";
+import friendsReducer from "./friends-reducer";
+
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
     app: appReducer,
     form: formReducer,
-    chat: chatReducer
+    chat: chatReducer,
+    news: newsReducer,
+    friendsPage: friendsReducer
 });
 
 type RootReducerType = typeof rootReducer;  // (globalState: GLOBALSTATE) => GLOBALSTATE

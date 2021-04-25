@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../types/types";
+import s from './Profile.module.css'
 
 type PropsType = {
     isOwner: boolean
@@ -16,7 +17,7 @@ type PropsType = {
 
 const Profile: FC<PropsType>= ({savePhoto, isOwner, profile, status, saveProfile, updateStatus}) => {
     return (
-        <div>
+        <div className={s.profileBlock}>
             <ProfileInfo
                 savePhoto={savePhoto}
                 isOwner={isOwner}

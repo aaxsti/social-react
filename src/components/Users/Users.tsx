@@ -87,7 +87,7 @@ export const Users: FC<PropsType> = (props) => {
 
     return (
         <div className={s.users}>
-
+            <h2>Пользователи</h2>
             <UsersSearchForm onFilterChanged={onFilterChanged}/>
 
             <Paginator
@@ -105,6 +105,12 @@ export const Users: FC<PropsType> = (props) => {
                     follow={userFollow}
                 />)}
             </div>
+            <Paginator
+                currentPage={currentPage}
+                onPageChanged={onPageChanged}
+                totalItemsCount={totalUsersCount}
+                pageSize={pageSize}
+            />
         </div>
     )
 }

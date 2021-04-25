@@ -1,4 +1,5 @@
 import React, {useEffect, useState, FC, ChangeEvent} from 'react';
+import {Input} from "antd";
 
 type PropsType = {
     status: string
@@ -30,13 +31,14 @@ const ProfileStatusWithHooks: FC<PropsType> = (props) => {
     return (
         <div>
             {!editMode &&
-            <div>
-                <b>Status: </b><span onDoubleClick={activateEditMode}>{props.status || "----"}</span>
+            <div style={{float: 'right'}}>
+                <span style={{fontSize: '17px', color:'#ffffff'}} onDoubleClick={activateEditMode}>{props.status || "----"}</span>
             </div>
             }
             {editMode &&
             <div>
-                <input
+                <Input
+                    style={{width: '150px', float: 'right'}}
                     onChange={onStatusChange}
                     autoFocus={true}
                     onBlur={deactivateEditMode}

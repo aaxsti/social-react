@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+    scrollbar-width: thin;          /* "auto" or "thin" */
+    scrollbar-color: #a3cfff #dadcdf;   /* scroll thumb and track */
+
 }
 
 code {

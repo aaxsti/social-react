@@ -1,7 +1,8 @@
 import {GetItemsType, instance} from "./api";
 
 export const friendsAPI = {
-    getFriends(friend = true){
-        return instance.get<GetItemsType>(`friends/${friend}`).then(res => res.data)
+    getFriends() {
+        return instance.get<GetItemsType>('users?friend=true')
+            .then(res => res.data)
     }
 }

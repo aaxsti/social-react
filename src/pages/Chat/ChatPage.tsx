@@ -1,14 +1,48 @@
-import {Button} from "antd"
+import {Button, Col, Row} from "antd"
 import React, {FC, useEffect, useRef, useState} from "react"
 import {ChatMessageAPIType} from "../../api/chat-api"
 import {useDispatch, useSelector} from "react-redux";
 import {sendMessage, startMessagesListening, stopMessagesListening} from "../../redux/chat-reducer";
 import {AppStateType} from "../../redux/redux-store";
+import TextArea from "antd/lib/input/TextArea";
+import {Image} from 'antd';
+import s from './ChatPage.module.css'
+import userPhoto from "../../assets/images/user.png";
 
 const ChatPage: FC = () => {
     return (
         <div>
-            <Chat/>
+            <Row>
+                <Col>
+                    <Dialogs/>
+                </Col>
+                <Col>
+                    <Chat/>
+                </Col>
+            </Row>
+        </div>
+    )
+}
+
+const Dialogs: FC = () => {
+    return (
+        <div className={s.dialogsBlock}>
+            <Row className={s.dialogElement}>
+                <Image src={"https://picsum.photos/400/400"} className={s.dialogImage}/>
+                <span className={s.dialogName}>Максим</span>
+            </Row>
+            <Row className={s.dialogElement}>
+                <Image src={"https://picsum.photos/200/200"} className={s.dialogImage}/>
+                <span className={s.dialogName}>Илья</span>
+            </Row>
+            <Row className={s.dialogElement}>
+                <Image src={"https://picsum.photos/300/300"} className={s.dialogImage}/>
+                <span className={s.dialogName}>Игорь</span>
+            </Row>
+            <Row className={s.dialogElement}>
+                <Image src={"https://picsum.photos/100/100"} className={s.dialogImage}/>
+                <span className={s.dialogName}>Александр</span>
+            </Row>
         </div>
     )
 }
@@ -37,7 +71,7 @@ const Chat: FC = () => {
     )
 }
 
-const Messages: FC<{}> = ({}) => {
+const Messages: FC<{}> = React.memo(({}) => {
     const messages = useSelector((state: AppStateType) => state.chat.messages)
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
     const [isAutoScroll, setIsAutoScroll] = useState(false)
@@ -58,20 +92,26 @@ const Messages: FC<{}> = ({}) => {
     }, [messages])
 
     return (
-        <div style={{height: '400px', width: '400px', overflowY: 'auto'}} onScroll={scrollHandler}>
+        <div style={{height: '400px', width: '600px', overflowY: 'auto'}} onScroll={scrollHandler}>
             {messages.map((m, index) => <Message key={index} message={m}/>)}
-            <div ref={messagesAnchorRef}></div>
+            <div ref={messagesAnchorRef}>
+
+            </div>
         </div>
     )
-}
+})
 
 const Message: FC<{ message: ChatMessageAPIType }> = React.memo(({message}) => {
     return (
         <div>
-            <img src={message.photo} style={{width: '30px'}}/> <b>{message.userName}</b>
-            <br/>
-            {message.message}
-            <hr/>
+
+            <div style={{padding: '3px 0 0 10px', borderBottom: '1px #dadcdf solid'}}>
+                <img alt='User photo' src={message.photo !== null ? message.photo : userPhoto} style={{width: '30px', borderRadius: 15}}/>
+                <b style={{width: '30px', paddingLeft: 7}}>{message.userName}</b>
+                <br/>
+                {message.message}
+            </div>
+
         </div>
     )
 })
@@ -92,10 +132,11 @@ const AddMessageForm: FC<{}> = ({}) => {
 
     return (
         <div>
-            <div>
-                <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message}>
+            <div style={{padding: '20px 0 0 0'}}>
+                <TextArea autoSize={false} style={{width: "400px"}} onChange={(e) => setMessage(e.currentTarget.value)}
+                          value={message}>
 
-                </textarea>
+                </TextArea>
             </div>
             <div>
                 <Button disabled={status !== 'ready'} onClick={sendMessageHandler}>Send</Button>

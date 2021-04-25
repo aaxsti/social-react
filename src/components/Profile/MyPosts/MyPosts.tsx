@@ -14,7 +14,7 @@ export type DispatchPropsType = {
 
 const MyPosts: FC<MapPropsType & DispatchPropsType> = ({posts, addPost}) => {
 
-    let postsElements = posts.reverse().map((p) => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>);
+    let postsElements = posts.reverse().map((p) => <Post message={p.message} key={p.id} likesCount={p.likesCount} date={p.date}/>);
 
     let addNewPost = (values: AddPostFormValuesType) => {
         addPost(values.newPostText);
@@ -22,7 +22,8 @@ const MyPosts: FC<MapPropsType & DispatchPropsType> = ({posts, addPost}) => {
 
     return (
         <div className={s.postsBlock}>
-            <h3>My posts</h3>
+            <h3>Мои записи</h3>
+            <br/>
             <AddNewPostForm onSubmit={addNewPost}/>
             <div className={s.posts}>
                 {postsElements}

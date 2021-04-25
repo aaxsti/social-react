@@ -6,8 +6,8 @@ import {ResultCodesEnum} from "../api/api";
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Привет, как дела?', likesCount: 25},
-        {id: 2, message: 'Это мой первый пост', likesCount: 15},
+        {id: 1, message: 'Привет, как дела?', likesCount: 25, date: new Date()},
+        {id: 2, message: 'Это мой первый пост', likesCount: 15, date: new Date()}
     ] as Array<PostType>,
     profile: null as ProfileType | null,
     status: '',
@@ -20,6 +20,7 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
                 id: 5,
                 message: action.newPostText,
                 likesCount: 0,
+                date: new Date()
             };
             return {
                 ...state,
@@ -81,7 +82,7 @@ export const updateStatus = (status: string): ThunkType => async (dispatch) => {
 
 export const savePhoto = (file: File): ThunkType => async (dispatch) => {
     let data = await profileAPI.savePhoto(file);
-    if(data.resultCode === ResultCodesEnum.Success) {
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(actions.savePhotoSuccess(data.data.photos));
     }
 }

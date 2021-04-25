@@ -1,14 +1,18 @@
 import React, {FC} from 'react';
 import {Link} from "react-router-dom";
 import {Avatar, Button, Col, Layout, Menu, Row} from "antd";
-import {UserOutlined} from "@ant-design/icons";
+import {HomeOutlined, UserOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
 import {selectCurrentUserLogin, selectIsAuth} from "../../redux/auth-selectors";
 import {logout} from "../../redux/auth-reducer";
+import {AppStateType} from "../../redux/redux-store";
+import Logo from '../../assets/images/logo.svg'
 
 export type MapPropsType = {}
 
 const Header: FC<MapPropsType> = (props) => {
+
+    const userAvatar = useSelector((state: AppStateType) => state.profilePage.profile?.photos.large)
 
     const isAuth = useSelector(selectIsAuth)
     const login = useSelector(selectCurrentUserLogin)
@@ -23,23 +27,25 @@ const Header: FC<MapPropsType> = (props) => {
     return (
         <Header className="header">
             <Row>
-                <Col span={18}>
-                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                        <Menu.Item key="1"><Link to="/users">Пользователи</Link></Menu.Item>
-                    </Menu>
+                <Col span={20}>
+                    <img src={Logo} style={{width: '40px'}}/>
+                    {/*<Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>*/}
+                    {/*    <Menu.Item key="1"><Link to="/users">Пользователи</Link></Menu.Item>*/}
+                    {/*    <Menu.Item key="2"><Link to="/chat">Мессенджер</Link></Menu.Item>*/}
+                    {/*</Menu>*/}
                 </Col>
                 {isAuth
                     ? <>
                         <Col span={1}>
-                            <Avatar style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}/>
+                            <Link to="/profile"><Avatar src={userAvatar} size={"large"}/></Link>
                         </Col>
-                        <Col span={5}>
-                            <Button onClick={logoutCallback}>Log out</Button>
+                        <Col span={2}>
+                            <Button onClick={logoutCallback}>Выйти</Button>
                         </Col>
                     </>
                     : <Col span={6}>
                         <Button>
-                            <Link to={'/login'}>Login</Link>
+                            <Link to={'/login'}>Войти</Link>
                         </Button>
                     </Col>
                 }

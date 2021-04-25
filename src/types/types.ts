@@ -2,6 +2,7 @@ export type PostType = {
     id: number
     message: string
     likesCount: number
+    date: Date
 }
 export type ContactsType = {
     github: string
@@ -46,4 +47,17 @@ export type DialogType = {
     id: number
     name: string
     imgLink: string
+}
+export type NewsType = {
+    list: Array<any>
+    size: number
+    page: number
+    preloader: boolean
+}
+export type FriendsType = {
+    list: Array<any>,
+    size: number,
+    page: number,
+    showmore: boolean,
+    preloader: boolean
 }
