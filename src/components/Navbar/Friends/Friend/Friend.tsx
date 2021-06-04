@@ -11,15 +11,20 @@ type PropsType = {
 
 const Friend: FC<PropsType> = ({friend}) => {
     return (
-        <Col style={{padding: '8px 8px 0 0'}}>
+        <Col style={{margin: '0 auto', padding: '10px 10px 0 0'}}>
             <NavLink to={'/profile/' + friend.id}>
                 <Card
+                    bordered={true}
                     hoverable
                     style={{width: 150}}
-                    cover={<img alt="friend photo"
-                                src={friend.photos.small != null ? friend.photos.small : userPhoto}/>}
+                    cover={<img
+                        alt="friend photo"
+                        src={friend.photos.large != null ? friend.photos.large : userPhoto}/>
+                    }
                 >
-                    <Meta title={friend.name} description="ГГУ им. Ф. Скорины"/>
+                    <Meta title={friend.name} description={friend.status && friend.status.length >= 20 ? `${friend.status.slice(0, 20)}...` : friend.status}/>
+
+
                 </Card>
             </NavLink>
         </Col>

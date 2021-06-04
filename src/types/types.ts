@@ -48,11 +48,14 @@ export type DialogType = {
     name: string
     imgLink: string
 }
+// export type NewsType = {
+//     list: Array<any>
+//     size: number
+//     page: number
+//     preloader: boolean
+// }
 export type NewsType = {
-    list: Array<any>
-    size: number
-    page: number
-    preloader: boolean
+    news: Array<any>
 }
 export type FriendsType = {
     list: Array<any>,

@@ -1,5 +1,5 @@
 import {DialogType, MessageType} from "../types/types";
-import {InferActionsTypes} from "./redux-store";
+import {InferActionsTypes} from "./store/redux-store";
 
 let initialState = {
     messages: [

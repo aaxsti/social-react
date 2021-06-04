@@ -1,23 +1,26 @@
 import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
-import {BaseThunkType, InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
 import {profileAPI} from "../api/profile-api";
 import {ResultCodesEnum} from "../api/api";
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Привет, как дела?', likesCount: 25, date: new Date()},
-        {id: 2, message: 'Это мой первый пост', likesCount: 15, date: new Date()}
+        {id: 1, message: 'Привет, как дела?', likesCount: 25,
+            date: new Date(2021, 1, 21, 17, 55)},
+        {id: 2, message: 'Это мой первый пост', likesCount: 15,
+            date: new Date(2021, 3, 13, 13, 27)}
     ] as Array<PostType>,
     profile: null as ProfileType | null,
     status: '',
+    editMode: false
 };
 
 const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'SN/PROFILE/ADD_POST':
             let newPost = {
-                id: 5,
+                id: Math.floor(Math.random() * 1000),
                 message: action.newPostText,
                 likesCount: 0,
                 date: new Date()
@@ -94,7 +97,7 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch,
         if (userId != null) {
             dispatch(await getUserProfile(userId))
         } else {
-            throw new Error('userIf can`t be null')
+            throw new Error('userId can`t be null')
         }
     } else {
         dispatch(stopSubmit("edit-profile", {_error: data.messages[0]}))

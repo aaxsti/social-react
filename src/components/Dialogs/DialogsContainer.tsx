@@ -4,7 +4,7 @@ import {actions} from "../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/store/redux-store";
 
 let mapStateToProps = (state: AppStateType) => {
     return {

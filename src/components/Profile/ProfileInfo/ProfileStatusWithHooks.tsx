@@ -1,9 +1,11 @@
 import React, {useEffect, useState, FC, ChangeEvent} from 'react';
 import {Input} from "antd";
+import {useDispatch} from "react-redux";
+import {updateStatus} from "../../../redux/profile-reducer";
 
 type PropsType = {
     status: string
-    updateStatus: (status: string) => void
+    isOwner: boolean
 }
 
 const ProfileStatusWithHooks: FC<PropsType> = (props) => {
@@ -11,17 +13,19 @@ const ProfileStatusWithHooks: FC<PropsType> = (props) => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
 
-    useEffect( () => {
-       setStatus(props.status);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setStatus(props.status);
     }, [props.status]);
 
     const activateEditMode = () => {
-        setEditMode(true);
+        props.isOwner && setEditMode(true);
     };
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        props.updateStatus(status);
+        dispatch(updateStatus(status));
     }
 
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,14 +35,15 @@ const ProfileStatusWithHooks: FC<PropsType> = (props) => {
     return (
         <div>
             {!editMode &&
-            <div style={{float: 'right'}}>
-                <span style={{fontSize: '17px', color:'#ffffff'}} onDoubleClick={activateEditMode}>{props.status || "----"}</span>
+            <div>
+                <div style={{paddingTop: 4, fontSize: '16px'}}
+                     onDoubleClick={activateEditMode}>{props.status || "----"}</div>
             </div>
             }
             {editMode &&
             <div>
                 <Input
-                    style={{width: '150px', float: 'right'}}
+                    style={{width: '276px'}}
                     onChange={onStatusChange}
                     autoFocus={true}
                     onBlur={deactivateEditMode}

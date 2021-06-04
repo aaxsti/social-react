@@ -1,8 +1,6 @@
 import {UserType} from "../types/types";
-import {BaseThunkType, InferActionsTypes} from "./redux-store";
-import {Dispatch} from "redux";
-import {friendsAPI} from "../api/friends-api";
-import {FilterType} from "./users-reducer";
+import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
+import {usersAPI} from "../api/users-api";
 
 let initialState = {
     friends: [] as Array<UserType>
@@ -23,8 +21,7 @@ export const actions = {
 
 export const requestFriends = (): ThunkType =>
     async (dispatch) => {
-        console.log(1)
-        let data = await friendsAPI.getFriends();
+        let data = await usersAPI.getUsers(1, 100, '', true);
         dispatch(actions.setFriends(data.items));
     }
 
@@ -32,5 +29,4 @@ export default friendsReducer;
 
 export type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>
-type DispatchType = Dispatch<ActionsType>
 type ThunkType = BaseThunkType<ActionsType>

@@ -4,7 +4,6 @@ import cn from 'classnames';
 import { Button } from "antd";
 import {LeftOutlined, RightOutlined } from "@ant-design/icons";
 
-
 type PropsType = {
     totalItemsCount: number
     pageSize: number
@@ -21,15 +20,16 @@ const Paginator: FC<PropsType> = ({
                                       onPageChanged = x => x,
                                       portionSize = 10
                                   }) => {
-
+    // Getting total pages count
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
 
+    // Pushing pages to array
     let pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
 
-    let [portionNumber, setPortionNumber] = useState(1);
+    const [portionNumber, setPortionNumber] = useState(1);
 
     let portionCount = Math.ceil(pagesCount / portionSize);
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;

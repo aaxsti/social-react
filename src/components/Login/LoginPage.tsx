@@ -1,9 +1,11 @@
 import React, {FC} from "react";
-import LoginForm from "./LoginForm/LoginForm";
+import LoginForm from "../forms/LoginForm/LoginForm";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/store/redux-store";
 import {login} from "../../redux/auth-reducer";
+import {LoginOutlined} from "@ant-design/icons";
+import {selectIsAuth} from "../../selectors/auth-selectors";
 
 export type LoginFormOwnProps = {}
 
@@ -15,7 +17,7 @@ export type LoginFormValuesType = {
 
 export const LoginPage: FC = () => {
 
-    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
+    const isAuth = useSelector(selectIsAuth)
 
     const dispatch = useDispatch()
 
@@ -29,7 +31,7 @@ export const LoginPage: FC = () => {
 
     return (
         <div>
-            <h1>Войти</h1>
+            <h1 style={{paddingBottom: 8}}>Войти в аккаунт &nbsp; &nbsp;<LoginOutlined /></h1>
             <LoginForm onSubmit={onSubmit}/>
         </div>
     )

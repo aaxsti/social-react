@@ -1,7 +1,7 @@
 import {APIResponseType, ResultCodesEnum} from "../api/api";
 import {updateObjectInArray} from "../utils/object-helpers";
 import {UserType} from "../types/types";
-import {BaseThunkType, InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/users-api";
 

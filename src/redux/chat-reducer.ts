@@ -1,7 +1,9 @@
 import {FormAction} from "redux-form";
-import {BaseThunkType, InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
 import {chatAPI, ChatMessageAPIType, StatusType} from "../api/chat-api";
 import {Dispatch} from "redux";
+// todo add id to message
+
 
 type ChatMessageType = ChatMessageAPIType
 
@@ -69,7 +71,7 @@ export const stopMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.stop()
 }
 
-export const sendMessage = (message: string): ThunkType => async (dispatch) => {
+export const sendMessage = (message: string): ThunkType => async () => {
     chatAPI.sendMessage(message);
 }
 

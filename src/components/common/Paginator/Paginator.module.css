@@ -1,13 +1,7 @@
-.selectedPage {
-    color: red;
-    font-weight: bold;
-}
-
 .pageNumbers {
     font-size: 18px;
     margin: 0 5px 0 5px;
     cursor: default;
-
 }
 
 .paginator {
