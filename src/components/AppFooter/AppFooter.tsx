@@ -4,44 +4,15 @@ import linkedinIcon from '../../assets/about/linkedin.svg'
 import vkIcon from '../../assets/about/vkontakte.svg'
 import telegramIcon from '../../assets/about/telegram.svg'
 import gmailIcon from '../../assets/about/gmail.svg'
-import {Footer} from "antd/es/layout/layout";
-import styled from "styled-components";
+import {
+    AboutBlock,
+    AboutBlockHeader,
+    AboutBlockInfo,
+    FooterWrapper,
+    IconsBlock,
+    IconsBlockElement} from "./AppFooter.styled";
 
 type PropsType = {}
-
-const FooterWrapper = styled(Footer)`
-  text-align: center;
-  background-color: #e8e8ed
-`
-const AboutBlock = styled.div`
-  margin: 0 auto;
-  width: 500px;
-`
-const AboutBlockHeader = styled.h3`
-  margin: 0;
-  padding: 0 0 15px 0;
-  font-weight: lighter;
-  text-align: center;
-  font-size: 18px;
-`
-const IconsBlock = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const IconsBlockElement = styled.a`
-  outline: none;
-  padding-right: 10px;
-
-  &:last-child {
-    padding-right: 0;
-  }
-`
-const AboutBlockInfo = styled.div`
-  font-weight: lighter;
-  padding-top: 20px;
-`
 
 const AppFooter: FC<PropsType> = () => {
     return (

@@ -34,33 +34,28 @@ export type UserType = {
     status: string
     photos: PhotosType
 }
-export type FriendType = {
-    id: number
-    name: string
-    imgLink: string
-}
 export type MessageType = {
     id: number
     message: string
 }
+export type NewsElementType = {
+    title: string
+    imageUrl: string
+    summary: string
+    publishedAt: string
+}
+export type NewsType = {
+    news: Array<NewsElementType>
+}
+export type DialogsType = {
+    dialogs: Array<DialogType>
+}
 export type DialogType = {
     id: number
-    name: string
-    imgLink: string
-}
-// export type NewsType = {
-//     list: Array<any>
-//     size: number
-//     page: number
-//     preloader: boolean
-// }
-export type NewsType = {
-    news: Array<any>
-}
-export type FriendsType = {
-    list: Array<any>,
-    size: number,
-    page: number,
-    showmore: boolean,
-    preloader: boolean
+    hasNewMessage: boolean
+    lastDialogActivityDate: string
+    lastUserActivityDate: string
+    newMessagesCount: number
+    photos: PhotosType
+    userName: string
 }

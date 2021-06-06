@@ -1,21 +1,19 @@
 import React from 'react';
-import {Layout, Menu} from "antd";
+import {Menu} from "antd";
 import {Link} from "react-router-dom";
-import {ExceptionOutlined, HeartOutlined, HomeOutlined, MessageOutlined, UserOutlined} from "@ant-design/icons";
-import styled from 'styled-components';
-
-const MenuWrapper = styled(Menu)`
-  padding-top: 15px;
-  height: 100%;
-  border-radius: 2px;
-`
+import {
+    ExceptionOutlined,
+    HeartOutlined,
+    HomeOutlined,
+    InfoCircleOutlined,
+    MessageOutlined,
+    UserOutlined, WechatOutlined
+} from "@ant-design/icons";
+import {MenuWrapper, SidebarWrapper} from './AppSidebar.styled';
 
 const AppSidebar = () => {
-
-    const {Sider} = Layout
-
     return (
-        <Sider width={190} style={{borderRadius: 2}}>
+        <SidebarWrapper width={190}>
             <MenuWrapper mode="inline">
                 <Menu.Item key="1">
                     <Link to="/profile">
@@ -47,8 +45,21 @@ const AppSidebar = () => {
                         Мессенджер
                     </Link>
                 </Menu.Item>
+                <Menu.Divider/>
+                <Menu.Item key="6">
+                    <Link to="/commonChat">
+                        <WechatOutlined />
+                        Общий чат
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="7">
+                    <Link to="/info">
+                        <InfoCircleOutlined />
+                        Информация
+                    </Link>
+                </Menu.Item>
             </MenuWrapper>
-        </Sider>
+        </SidebarWrapper>
     );
 }
 

@@ -1,31 +1,26 @@
 import React, {FC, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../redux/store/redux-store";
 import {requestFriends} from "../../redux/friends-reducer";
-import {Input, Row} from "antd";
-import Friend from "../../components/Navbar/Friends/Friend/Friend";
-import {SearchOutlined} from "@ant-design/icons";
+import {Row} from "antd";
+import Friend from "../../components/Friends/Friend/Friend";
 import {HeartOutlined} from "@ant-design/icons";
 import Preloader from "../../components/common/Preloader/Preloader";
-import {Redirect} from "react-router-dom";
-import {selectIsAuth} from "../../selectors/auth-selectors";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {selectUserFriends} from "../../selectors/friends-selectors";
+import {FriendsPageHeader, FriendsSearchInput, SearchIcon} from "./FriendsPage.styled";
 
 type PropsType = {}
 
 const FriendsPage: FC<PropsType> = () => {
     const [searchTerm, setSearchTerm] = useState('')
 
-    const dispatch = useDispatch()
-
     const friends = useSelector(selectUserFriends)
 
+    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(requestFriends());
     }, [])
-
 
     if (!friends) {
         return <Preloader/>
@@ -33,13 +28,14 @@ const FriendsPage: FC<PropsType> = () => {
 
     return (
         <div>
-            <h2 style={{paddingBottom: 9}}><HeartOutlined/> Мои друзья</h2>
+            <FriendsPageHeader><HeartOutlined/> Мои друзья</FriendsPageHeader>
             <div>
-                <Input style={{width: 200}} placeholder={'Поиск...'}
-                       onChange={event => {
-                           setSearchTerm(event.target.value)
-                       }}/>
-                <SearchOutlined style={{paddingLeft: 10}}/>
+                <FriendsSearchInput
+                    placeholder={'Поиск...'}
+                    onChange={event => {
+                        setSearchTerm(event.target.value)
+                    }}/>
+                <SearchIcon/>
             </div>
             <br/>
             <Row>

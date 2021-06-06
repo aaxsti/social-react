@@ -23,20 +23,20 @@ const FormControl: React.FC<FormControlPropsType> = ({meta: {touched, error}, ch
 
 export const Textarea: FC<WrappedFieldProps> = (props) => {
     const {input, meta, ...restProps} = props;
-    return <FormControl {...props}><TextArea {...input} {...restProps}/></FormControl>
+    return <FormControl {...props}><TextArea {...input} {...restProps} allowClear/></FormControl>
 }
 
 export const InputField: FC<WrappedFieldProps> = (props) => {
     const {input, meta, ...restProps} = props;
-    return <FormControl {...props}><Input {...input} {...restProps} style={{width: 300}}/></FormControl>
+    return <FormControl {...props}><Input {...input} {...restProps}/></FormControl>
 }
 
 export function createField<FormKeysType extends string>(placeholder: string | undefined,
-                            name: FormKeysType,
-                            validators: Array<FieldValidatorType>,
-                            component: FC<WrappedFieldProps>,
-                            props = {},
-                            text = "") {
+                                                         name: FormKeysType,
+                                                         validators: Array<FieldValidatorType>,
+                                                         component: FC<WrappedFieldProps>,
+                                                         props = {},
+                                                         text = "") {
     return (
         <div>
             <Field placeholder={placeholder}

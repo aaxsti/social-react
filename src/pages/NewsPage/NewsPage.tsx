@@ -1,15 +1,16 @@
 import React, {FC} from "react";
 import {useSelector} from "react-redux";
-import {AppStateType} from "../../redux/store/redux-store";
-import NewsItem from "../../components/NewsItem/NewsItem";
 import {Divider} from "antd";
 import {ExceptionOutlined} from "@ant-design/icons";
+import News from "../../components/News/News";
+import {selectNews} from "../../selectors/news-selectors";
+
 type PropsType = {}
 
-const News: FC<PropsType> = () => {
-    const news = useSelector((state: AppStateType) => state.newsPage.news)
+const NewsPage: FC<PropsType> = () => {
+    const news = useSelector(selectNews)
 
-    let newsElements = news.map((item, index) => <NewsItem
+    let newsElements = news.map((item, index) => <News
         title={item.title} image={item.imageUrl} description={item.summary}
         publishedAt={item.publishedAt} key={index}/>)
 
@@ -25,4 +26,4 @@ const News: FC<PropsType> = () => {
     )
 }
 
-export default News;
+export default NewsPage;

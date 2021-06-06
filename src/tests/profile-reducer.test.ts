@@ -1,5 +1,4 @@
 import profileReducer, {actions} from "../redux/profile-reducer";
-import {ProfileType} from "../types/types";
 
 let state = {
     posts: [

@@ -1,15 +1,11 @@
-import {Button, Col, Row} from "antd"
-import React, {FC, useEffect, useRef, useState} from "react"
-import {ChatMessageAPIType} from "../../api/chat-api"
+import {Col, List, Row} from "antd"
+import React, {FC, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux";
-import {sendMessage, startMessagesListening, stopMessagesListening} from "../../redux/chat-reducer";
-import {AppStateType} from "../../redux/store/redux-store";
-import TextArea from "antd/lib/input/TextArea";
-import {Image} from 'antd';
-import s from './ChatPage.module.css'
-import userPhoto from "../../assets/images/user.png";
-import {SendOutlined, MessageOutlined} from "@ant-design/icons";
+import {MessageOutlined} from "@ant-design/icons";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {getDialogs} from "../../redux/dialogs-reducer";
+import {selectDialogs} from "../../selectors/dialogs-selectors";
+import Dialog from "../../components/Dialogs/Dialog/Dialog";
 
 const ChatPage: FC = () => {
     return (
@@ -20,7 +16,7 @@ const ChatPage: FC = () => {
                     <Dialogs/>
                 </Col>
                 <Col>
-                    <Chat/>
+                  Чат
                 </Col>
             </Row>
         </div>
@@ -28,123 +24,28 @@ const ChatPage: FC = () => {
 }
 
 const Dialogs: FC = () => {
-    return (
-        <div className={s.dialogsBlock}>
-            <Row className={s.dialogElement}>
-                <Image src={"https://picsum.photos/400/400"} className={s.dialogImage}/>
-                <span className={s.dialogName}>Максим</span>
-            </Row>
-            <Row className={s.dialogElement}>
-                <Image src={"https://picsum.photos/200/200"} className={s.dialogImage}/>
-                <span className={s.dialogName}>Илья</span>
-            </Row>
-            <Row className={s.dialogElement}>
-                <Image src={"https://picsum.photos/300/300"} className={s.dialogImage}/>
-                <span className={s.dialogName}>Игорь</span>
-            </Row>
-            <Row className={s.dialogElement}>
-                <Image src={"https://picsum.photos/100/100"} className={s.dialogImage}/>
-                <span className={s.dialogName}>Александр</span>
-            </Row>
-        </div>
-    )
-}
 
-const Chat: FC = () => {
-
+    const dialogs = useSelector(selectDialogs);
     const dispatch = useDispatch()
 
-    const status = useSelector((state: AppStateType) => state.chat.status)
-
     useEffect(() => {
-        dispatch(startMessagesListening());
-        return () => {
-            dispatch(stopMessagesListening());
-        }
-    }, [])
+        dispatch(getDialogs())
+    }, []);
 
     return (
         <div>
-            {status === 'error' && <div>Some error occurred. Please refresh the page</div>}
-            <>
-                <Messages/>
-                <AddMessageForm/>
-            </>
+            <List style={{width: 300}}>
+                {dialogs.map(d => <Dialog
+                    key={d.id}
+                    userName={d.userName}
+                    lastDialogActivityDate={d.lastDialogActivityDate}
+                    lastUserActivityDate={d.lastUserActivityDate}
+                    newMessagesCount={d.newMessagesCount}
+                    photo={d.photos.small}
+                    hasNewMessage={d.hasNewMessage}
+                />)}
+            </List>
         </div>
-    )
-}
-
-const Messages: FC<{}> = ({}) => {
-    const messages = useSelector((state: AppStateType) => state.chat.messages)
-    const messagesAnchorRef = useRef<HTMLDivElement>(null)
-    const [isAutoScroll, setIsAutoScroll] = useState(false)
-
-    const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        const element = e.currentTarget;
-        if (Math.abs((element.scrollHeight - element.scrollTop) - element.clientHeight) < 300) {
-            !isAutoScroll && setIsAutoScroll(true)
-        } else {
-            isAutoScroll && setIsAutoScroll(false)
-        }
-    }
-
-    useEffect(() => {
-        if (isAutoScroll) {
-            messagesAnchorRef.current?.scrollIntoView({behavior: 'smooth'})
-        }
-    }, [messages])
-
-    return (
-        <div style={{height: '400px', width: '500px', overflowY: 'auto'}} onScroll={scrollHandler}>
-            {messages.map((m, index) => <Message key={index} message={m}/>)}
-            <div ref={messagesAnchorRef}>
-
-            </div>
-        </div>
-    )
-}
-
-const Message: FC<{ message: ChatMessageAPIType }> = React.memo(({message}) => {
-    return (
-        <div>
-
-            <div style={{padding: '3px 0 0 10px', borderBottom: '1px #dadcdf solid'}}>
-                <img alt='User photo' src={message.photo !== null ? message.photo : userPhoto} style={{width: '30px', borderRadius: 15}}/>
-                <b style={{width: '30px', paddingLeft: 7}}>{message.userName}</b>
-                <br/>
-                {message.message}
-            </div>
-
-        </div>
-    )
-})
-
-const AddMessageForm: FC<{}> = ({}) => {
-    const [message, setMessage] = useState('')
-    const dispatch = useDispatch()
-
-    const status = useSelector((state: AppStateType) => state.chat.status)
-
-    const sendMessageHandler = () => {
-        if (!message) {
-            return;
-        }
-        dispatch(sendMessage(message))
-        setMessage('')
-    }
-
-    return (
-        <Row>
-            <Col style={{padding: '20px 0 0 0'}}>
-                <TextArea autoSize={true} style={{width: 420, height: 30}} onChange={(e) => setMessage(e.currentTarget.value)}
-                          value={message}>
-
-                </TextArea>
-            </Col>
-            <Col style={{padding: '20px 0 0 0'}}>
-                <Button disabled={status !== 'ready'} onClick={sendMessageHandler}><SendOutlined /></Button>
-            </Col>
-        </Row>
     )
 }
 

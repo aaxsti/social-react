@@ -1,7 +1,5 @@
 import {NewsType} from "../types/types";
-import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
-import {Dispatch} from "redux";
-import {NewsAPI} from "../api/news-api";
+import {InferActionsTypes} from "./store/redux-store";
 
 let initialState: NewsType = {
     news: [
@@ -49,18 +47,8 @@ export const actions = {
     setNews: (data: Array<any>) => ({type: 'SN/NEWS/FIND_CITY', data} as const),
 }
 
-// export const requestNews = (size: number): ThunkType => {
-//     return async (dispatch) => {
-//         let response = await NewsAPI.findApi(size)
-//         dispatch(actions.setNews(response.data))
-//         console.log(response.data)
-//     }
-// }
-
 export default newsReducer;
 
 export type InitialStateType = typeof initialState
 
 type ActionsType = InferActionsTypes<typeof actions>
-type DispatchType = Dispatch<ActionsType>
-type ThunkType = BaseThunkType<ActionsType>

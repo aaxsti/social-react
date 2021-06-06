@@ -3,10 +3,10 @@ import style from "../FormsControls/FormsControls.module.css";
 import {createField, GetStringKeys, InputField} from "../FormsControls/FormsControls";
 import {required} from "../../../utils/validators/validators";
 import React, {FC} from "react";
-import {LoginFormOwnProps, LoginFormValuesType} from "../../Login/LoginPage";
-import {Button, Col, Input, Row} from "antd";
+import {LoginFormOwnProps, LoginFormValuesType} from "../../../pages/LoginPage/LoginPage";
+import {Button} from "antd";
 import {NavLink} from "react-router-dom";
-import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
+import {LoginFormField, LoginFormWrapper } from "./LoginForm.styled";
 
 type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>;
 
@@ -14,19 +14,34 @@ export const LoginForm: FC<InjectedFormProps<LoginFormValuesType & LoginFormOwnP
     ({handleSubmit, error}) => {
         return (
             <form onSubmit={handleSubmit}>
-                <Row style={{width: '200px'}}>
-                    <Row style={{paddingBottom: 15}}>
-                        {createField<LoginFormValuesTypeKeys>("Email", "email", [required], InputField)}
-                    </Row>
+                <LoginFormWrapper>
+                    <LoginFormField>
+                        {createField<LoginFormValuesTypeKeys>(
+                            "Email",
+                            "email",
+                            [required], InputField)
+                        }
+                    </LoginFormField>
+                    <LoginFormField>
+                        {createField<LoginFormValuesTypeKeys>(
+                            "Пароль",
+                            "password",
+                            [required],
+                            InputField,
+                            {type: "password"})}
+                    </LoginFormField>
+                    Запомнить меня &nbsp;
+                    <LoginFormField>
+                            {createField<LoginFormValuesTypeKeys>(
+                                undefined,
+                                "rememberMe",
+                                [],
+                                InputField,
+                                {type: "checkbox"},
+                                "")}
+                    </LoginFormField>
+                </LoginFormWrapper>
 
-                    <Row style={{paddingBottom: 15}}>
-                        {createField<LoginFormValuesTypeKeys>("Пароль", "password", [required], InputField, {type: "password"})}
-                    </Row>
-                    <Row style={{paddingBottom: 15}}>
-                            {createField<LoginFormValuesTypeKeys>(undefined, "rememberMe", [], InputField, {type: "checkbox"}, "")}
-                            Запомнить меня
-                    </Row>
-                </Row>
                 {error &&
                 <div className={style.formSummeryError}>
                     {error}

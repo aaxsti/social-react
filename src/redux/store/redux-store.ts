@@ -17,7 +17,7 @@ let rootReducer = combineReducers({
     friendsPage: friendsReducer,
     newsPage: newsReducer,
     usersPage: usersReducer,
-    dialogsPage: dialogsReducer,
+    dialogs: dialogsReducer,
     chat: chatReducer,
     form: formReducer
 });

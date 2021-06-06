@@ -4,12 +4,12 @@ import {FilterType} from "../../../redux/users-reducer";
 import {useSelector} from "react-redux";
 import {getUsersFilter} from "../../../selectors/users-selectors";
 import Button from "antd/lib/button";
-import {Input, Select} from "formik-antd";
-import { SearchOutlined } from "@ant-design/icons";
+import {Select} from "formik-antd";
+import {SearchOutlined} from "@ant-design/icons";
+import {SearchTermSelect, SearchUserInput } from "./UsersSearchForm.styled";
 
 const usersSearchFormValidate = () => {
-    const errors = {};
-    return errors;
+    return {};
 }
 
 type FriendFormType = "true" | "false" | "null";
@@ -45,17 +45,17 @@ export const UsersSearchForm: FC<PropsType> = React.memo(({onFilterChanged}) => 
                 >
                     {({isSubmitting}) => (
                         <Form>
-                            <Input name="term" style={{width: 200}}/>
+                            <SearchUserInput name="term"/>
 
                             <Button htmlType="submit" disabled={isSubmitting}>
                                 <SearchOutlined />
                             </Button>
 
-                            <Select name="friend" style={{width: 160}}>
+                            <SearchTermSelect name="friend">
                                 <Select.Option value="null">Все</Select.Option>
                                 <Select.Option value="true">Только друзья</Select.Option>
                                 <Select.Option value="false">Все кроме друзей</Select.Option>
-                            </Select>
+                            </SearchTermSelect>
                         </Form>
                     )}
                 </Formik>

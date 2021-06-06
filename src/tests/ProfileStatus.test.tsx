@@ -1,23 +1,23 @@
 import React from "react";
 import { create } from "react-test-renderer";
-import ProfileStatusWithHooks from "../components/Profile/ProfileInfo/ProfileStatusWithHooks";
+import ProfileStatus from "../components/Profile/Profile/ProfileStatusWithHooks";
 
 describe("ProfileStatusWithHooks component", () => {
     test("status from props should be in the state", () => {
-        const component = create(<ProfileStatusWithHooks status="КУ" isOwner={true}/>);
+        const component = create(<ProfileStatus status="КУ" isOwner={true}/>);
         const instance = component.getInstance();
         expect(instance.state.status).toBe("КУ");
     });
 
     test("after creation <span> should contain correct status", () => {
-        const component = create(<ProfileStatusWithHooks status="КУ" isOwner={true}/>);
+        const component = create(<ProfileStatus status="КУ" isOwner={true}/>);
         const root = component.root;
         let span = root.findByType("span");
         expect(span).not.toBeNull();
     });
 
     test("after creation <input> shouldn`t be displayed", () => {
-        const component = create(<ProfileStatusWithHooks status="КУ" />);
+        const component = create(<ProfileStatus status="КУ" />);
         const root = component.root;
         expect(() => {
             let input = root.findByType("input");
@@ -25,7 +25,7 @@ describe("ProfileStatusWithHooks component", () => {
     });
 
     test("input should be displayed in editMode instead of span", () => {
-        const component = create(<ProfileStatusWithHooks status="КУ" />);
+        const component = create(<ProfileStatus status="КУ" />);
         const root = component.root;
         let span = root.findByType("span");
         span.props.onDoubleClick();
@@ -35,7 +35,7 @@ describe("ProfileStatusWithHooks component", () => {
 
     test("callback should be called", () => {
         const mockCallback = jest.fn();
-        const component = create(<ProfileStatusWithHooks status="КУ" updateStatus={mockCallback}/>);
+        const component = create(<ProfileStatus status="КУ" updateStatus={mockCallback}/>);
         const instance = component.getInstance();
         instance.deactivateEditMode();
         expect(mockCallback.mock.calls.length).toBe(1);

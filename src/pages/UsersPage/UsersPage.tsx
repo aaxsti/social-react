@@ -1,12 +1,11 @@
 import React, {FC, useEffect} from "react";
-import Paginator from "../../components/common/Paginator/Paginator";
-import User from "../../components/User/User";
+import User from "../../components/Users/User";
 import {UsersSearchForm} from "../../components/forms/UsersSearchForm/UsersSearchForm";
-import {FilterType, requestUsers, follow, unfollow} from "../../redux/users-reducer";
+import {FilterType, follow, requestUsers, unfollow} from "../../redux/users-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {
     getCurrentPage,
-    getFollowingInProgress, getIsFetching,
+    getFollowingInProgress,
     getPageSize,
     getTotalUsersCount,
     getUsers,
@@ -16,8 +15,9 @@ import {useHistory} from "react-router-dom";
 import * as queryString from "querystring";
 import Preloader from "../../components/common/Preloader/Preloader";
 import {UserOutlined} from "@ant-design/icons";
-import {List, Pagination} from "antd";
+import {List} from "antd";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {PaginatorWrapper, UserList, UsersPageWrapper } from "./UsersPage.styles";
 
 type PropsType = {}
 
@@ -25,7 +25,6 @@ type QueryParamsType = { term?: string; page?: string; friend?: string };
 
 const UsersPage: FC<PropsType> = () => {
 
-    const isFetching = useSelector(getIsFetching);
     const users = useSelector(getUsers)
     const totalUsersCount = useSelector(getTotalUsersCount)
     const currentPage = useSelector(getCurrentPage)
@@ -93,25 +92,20 @@ const UsersPage: FC<PropsType> = () => {
     }
 
     return (
-        <div style={{width: 1000}}>
-            <h2><UserOutlined/> Пользователи</h2>
+        <UsersPageWrapper>
+            <h2><UserOutlined/> Пользователи ({totalUsersCount})</h2>
+
             <UsersSearchForm onFilterChanged={onFilterChanged}/>
 
-            {/*<Pagination*/}
-            {/*    pageSize={pageSize}*/}
-            {/*    current={currentPage}*/}
-            {/*    total={totalUsersCount}*/}
-            {/*    onChange={onPageChanged}*/}
-            {/*    showSizeChanger={false}*/}
-            {/*/>*/}
-
-            <Paginator
-                currentPage={currentPage}
-                onPageChanged={onPageChanged}
-                totalItemsCount={totalUsersCount}
+            <PaginatorWrapper
                 pageSize={pageSize}
+                current={currentPage}
+                total={totalUsersCount}
+                onChange={onPageChanged}
+                showSizeChanger={false}
             />
-            <div style={{borderRadius: 2, marginBottom: 10}}>
+
+            <UserList>
                 <List size={'large'}>
                     {users.map(u => <User
                         user={u}
@@ -121,14 +115,17 @@ const UsersPage: FC<PropsType> = () => {
                         follow={userFollow}
                     />)}
                 </List>
-            </div>
-            <Paginator
-                currentPage={currentPage}
-                onPageChanged={onPageChanged}
-                totalItemsCount={totalUsersCount}
+            </UserList>
+
+            <PaginatorWrapper
                 pageSize={pageSize}
+                current={currentPage}
+                total={totalUsersCount}
+                onChange={onPageChanged}
+                showSizeChanger={false}
             />
-        </div>
+
+        </UsersPageWrapper>
     )
 }
 

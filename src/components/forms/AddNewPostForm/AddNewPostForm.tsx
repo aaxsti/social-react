@@ -2,8 +2,13 @@ import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, GetStringKeys, Textarea} from "../FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import React, {FC} from "react";
-import {Button, Form} from "antd";
+import {Button} from "antd";
+import styled from "styled-components";
 
+export const AddPostButtonWrapper = styled.div`
+  padding-top: 15px;
+  padding-bottom: 11px;
+`
 const maxLength400 = maxLengthCreator(400);
 
 export type AddPostFormValuesType = {
@@ -18,9 +23,9 @@ export const AddNewPostForm: FC<InjectedFormProps<AddPostFormValuesType & PropsT
         <div>
             <form onSubmit={props.handleSubmit}>
                 {createField<AddPostFormValuesKeysType>('Что у вас нового?', 'newPostText', [required, maxLength400], Textarea)}
-                <div style={{paddingBottom: 11, paddingTop: 15}}>
+                <AddPostButtonWrapper>
                     <Button htmlType="submit">Опубликовать</Button>
-                </div>
+                </AddPostButtonWrapper>
             </form>
         </div>
     )

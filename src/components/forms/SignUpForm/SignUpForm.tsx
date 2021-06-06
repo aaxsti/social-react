@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import {Button, Col, DatePicker, Input, Radio, Row} from "antd";
 import {NavLink} from "react-router-dom";
 import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
+import {SignUpFormElement, SignUpFormWrapper } from "./SignUpForm.styled";
 
 type PropsType = {}
 
@@ -11,44 +12,44 @@ export const SignUpForm: FC<PropsType> = () => {
     return (
         <form>
             <Row>
-                <Col style={{paddingRight: 30}}>
-                    <Row style={{paddingBottom: 15}}>
+                <SignUpFormWrapper>
+                    <SignUpFormElement>
                         <Input placeholder={'Email'}/>
-                    </Row>
-                    <Row style={{paddingBottom: 15}}>
+                    </SignUpFormElement>
+                    <SignUpFormElement>
                         <Input.Password
                             placeholder="Пароль"
                             iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                         />
-                    </Row>
-                    <Row style={{paddingBottom: 15}}>
+                    </SignUpFormElement>
+                    <SignUpFormElement>
                         <Input.Password
                             placeholder="Повторите пароль"
                             iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                         />
-                    </Row>
-                    <Row style={{paddingBottom: 15}}>
+                    </SignUpFormElement>
+                    <SignUpFormElement>
                         <Input placeholder={'Имя'}/>
-                    </Row>
-                    <Row style={{paddingBottom: 15}}>
+                    </SignUpFormElement>
+                    <SignUpFormElement>
                         <Input placeholder={'Фамилия'}/>
-                    </Row>
-                </Col>
+                    </SignUpFormElement>
+                </SignUpFormWrapper>
                 <Col>
-                    <Row style={{paddingBottom: 15, width: 220}}>
+                    <SignUpFormElement style={{width: 220}}>
                         <Input placeholder={'Номер телефона'}/>
-                    </Row>
+                    </SignUpFormElement>
                     <Row style={{paddingBottom: 23}}>
                         <Row style={{paddingRight: 10, paddingTop: 6}}>Дата рождения :</Row>
                         <DatePicker placeholder={'Выберите дату'} format={dateFormat}/>
                     </Row>
-                    <Row style={{paddingBottom: 15}}>
+                    <SignUpFormElement>
                         <Row style={{paddingRight: 30}}>Пол :</Row>
                         <Radio.Group>
                             <Radio value={1} style={{paddingRight: 20}}>Мужской</Radio>
                             <Radio value={2}>Женский</Radio>
                         </Radio.Group>
-                    </Row>
+                    </SignUpFormElement>
                 </Col>
             </Row>
             <Row>

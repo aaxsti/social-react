@@ -1,12 +1,15 @@
 import React, {FC} from 'react';
-import Post from "./Post";
+import Post from "./Post/Post";
 import AddNewPostForm, {AddPostFormValuesType} from "../../forms/AddNewPostForm/AddNewPostForm";
 import {useDispatch, useSelector} from "react-redux";
 import {selectProfileImage, selectProfilePosts} from "../../../selectors/profile-selectors";
 import {actions} from "../../../redux/profile-reducer";
-import {Divider} from "antd";
+import {MyPostsHeader, StyledDivider } from './ProfilePosts.styled';
+import {List} from "antd";
 
 type PropsType = {}
+
+const months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октябля", "Ноября", "Декабря"];
 
 const ProfilePosts: FC<PropsType> = () => {
     const posts = useSelector(selectProfilePosts)
@@ -14,7 +17,15 @@ const ProfilePosts: FC<PropsType> = () => {
 
     const dispatch = useDispatch()
 
-    let postsElements = posts.reverse().map((p) => <Post profileImage={profileImage} message={p.message} key={p.id} id={p.id} likesCount={p.likesCount} date={p.date}/>);
+    let postsElements = posts.reverse().map((p) => <Post
+        months={months}
+        profileImage={profileImage}
+        message={p.message}
+        key={p.id}
+        id={p.id}
+        likesCount={p.likesCount}
+        date={p.date}
+    />);
 
     let addNewPost = (values: AddPostFormValuesType) => {
         dispatch(actions.addPostActionCreator(values.newPostText));
@@ -22,14 +33,14 @@ const ProfilePosts: FC<PropsType> = () => {
 
     return (
         <div>
-            <Divider style={{marginBottom: 7}}/>
-            <h3 style={{paddingTop: 10}}>
+            <StyledDivider/>
+            <MyPostsHeader>
                 Мои записи
-            </h3>
+            </MyPostsHeader>
             <AddNewPostForm onSubmit={addNewPost}/>
-            <div>
+            <List size={'large'}>
                 {postsElements}
-            </div>
+            </List>
         </div>
     )
 }

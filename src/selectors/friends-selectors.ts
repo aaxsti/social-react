@@ -8,8 +8,7 @@ export const selectUserFriends = createSelector(
     friendsPage => friendsPage.friends
 )
 
-
 export const selectUserFriendsAmount = createSelector(
-    [friendsPage],
-    friendsPage => friendsPage.friends.length
+    [selectUserFriends],
+    selectUserFriends => selectUserFriends.length
 )

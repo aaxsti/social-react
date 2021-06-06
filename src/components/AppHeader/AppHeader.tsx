@@ -1,35 +1,17 @@
 import React from 'react';
-import {Header} from "antd/es/layout/layout";
-import styled from "styled-components";
 import {Avatar, Button, Col, Row} from "antd";
 import Logo from "../../assets/images/logo.svg";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuthorizedUserAvatar, selectAuthorizedUserEmail, selectIsAuth} from "../../selectors/auth-selectors";
 import {logout} from "../../redux/auth-reducer";
-import {AppStateType} from "../../redux/store/redux-store";
-
-const HeaderLogo = styled.img`
-  width: 40px;
-`
-
-const HeaderLogoWrapper = styled(Col)`
-  padding-left: 120px;
-`
-
-const HeaderUserAvatarLink = styled(Link)`
-  padding-right: 30px;
-`
-
-const HeaderLogoLink = styled(Link)`
-  color: black;
-
-  &:hover {
-    color: #414141;
-    text-decoration: underline;
-  }
-`
-
+import {
+    HeaderLogo,
+    HeaderLogoLink,
+    HeaderLogoWrapper,
+    HeaderUserAvatarLink,
+    HeaderUserEmail,
+    HeaderWrapper} from './AppHeader.styled';
 
 const AppHeader = () => {
     const isAuth = useSelector(selectIsAuth)
@@ -43,12 +25,12 @@ const AppHeader = () => {
     }
 
     return (
-        <Header style={{backgroundColor: '#979ea9'}}>
+        <HeaderWrapper>
             <Row>
                 <HeaderLogoWrapper flex="1 1 50px">
                     <HeaderLogo src={Logo} alt='App logo'/>
                     <HeaderLogoLink to='/profile'>
-                        <span style={{paddingLeft: 63}}>{authorizedUserEmail} </span>
+                        <HeaderUserEmail>{authorizedUserEmail} </HeaderUserEmail>
                     </HeaderLogoLink>
                 </HeaderLogoWrapper>
                 {isAuth
@@ -71,7 +53,7 @@ const AppHeader = () => {
                     </Col>
                 }
             </Row>
-        </Header>
+        </HeaderWrapper>
     );
 }
 

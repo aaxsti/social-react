@@ -6,9 +6,9 @@ import {ResultCodesEnum} from "../api/api";
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Привет, как дела?', likesCount: 25,
+        {id: 1, message: 'Это мой первый пост', likesCount: 25,
             date: new Date(2021, 1, 21, 17, 55)},
-        {id: 2, message: 'Это мой первый пост', likesCount: 15,
+        {id: 2, message: 'Всем привет', likesCount: 15,
             date: new Date(2021, 3, 13, 13, 27)}
     ] as Array<PostType>,
     profile: null as ProfileType | null,

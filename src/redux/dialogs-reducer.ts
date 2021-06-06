@@ -1,39 +1,38 @@
 import {DialogType, MessageType} from "../types/types";
-import {InferActionsTypes} from "./store/redux-store";
+import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
+import {ResultCodesEnum} from "../api/api";
+import {FormAction} from "redux-form";
+import {dialogsAPI} from "../api/dialogs-api";
 
 let initialState = {
-    messages: [
-        {id: 1, message: 'Hi!'},
-        {id: 2, message: 'How are you?'},
-        {id: 3, message: 'qq'},
-    ] as Array<MessageType>,
-    dialogs: [
-        {id: 1, name: 'Maxim', imgLink: 'https://picsum.photos/400/400'},
-        {id: 2, name: 'Ilya', imgLink: 'https://picsum.photos/100/100'},
-        {id: 3, name: 'Ivan', imgLink: 'https://picsum.photos/200/200'},
-        {id: 4, name: 'Stas', imgLink: 'https://picsum.photos/80/80'},
-        {id: 5, name: 'Sasha', imgLink: 'https://picsum.photos/90/90'},
-    ] as Array<DialogType>
+    messages: [] as Array<MessageType>,
+    dialogs: [] as Array<DialogType>
 };
 
 const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case "SN/DIALOGS/SEND_MESSAGE":
-            let body = action.newMessageBody;
-            return {
-                ...state,
-                messages: [...state.messages, {id: 6, message: body}],
-            };
+        case "SN/DIALOGS/SET_DIALOGS":
+            return {...state, dialogs: action.dialogs}
         default:
             return state;
     }
 }
 
 export const actions = {
-    sendMessage: (newMessageBody: string) => ({type: 'SN/DIALOGS/SEND_MESSAGE', newMessageBody} as const)
+    setDialogs: (dialogs: Array<DialogType>) => ({type: 'SN/DIALOGS/SET_DIALOGS', dialogs} as const)
+}
+
+export const startDialog = (userId: number): ThunkType => async () => {
+    await dialogsAPI.startDialog(userId);
+}
+
+export const getDialogs = (): ThunkType => async (dispatch) => {
+    let data = await dialogsAPI.getDialogs();
+    dispatch(actions.setDialogs(data));
 }
 
 export default dialogsReducer;
 
 export type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>
+type ThunkType = BaseThunkType<ActionsType | FormAction>
