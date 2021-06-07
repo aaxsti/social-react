@@ -40,18 +40,18 @@ const AppSidebar = () => {
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="5">
-                    <Link to="/chat">
+                    <Link to="/dialogs">
                         <MessageOutlined/>
                         Мессенджер
                     </Link>
                 </Menu.Item>
-                <Menu.Divider/>
                 <Menu.Item key="6">
                     <Link to="/commonChat">
                         <WechatOutlined />
                         Общий чат
                     </Link>
                 </Menu.Item>
+                <Menu.Divider/>
                 <Menu.Item key="7">
                     <Link to="/info">
                         <InfoCircleOutlined />

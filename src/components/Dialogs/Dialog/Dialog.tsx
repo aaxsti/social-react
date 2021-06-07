@@ -1,38 +1,46 @@
-import {Avatar, List} from 'antd';
+import {Avatar, Col} from 'antd';
 import React, {FC} from 'react';
 import {CloseCircleOutlined} from "@ant-design/icons";
-import styled from "styled-components";
-
-const DialogItemRight = styled.div`
-  font-size: 16px;
-`
+import {
+    DialogDate,
+    DialogItem, DialogItemInfo, DialogItemRight, NewMessagesCount
+} from './Dialog.styled';
+import {useDispatch} from "react-redux";
+import {getDialogMessages} from "../../../redux/dialogs-reducer";
 
 type PropsType = {
     hasNewMessage: boolean
-    lastDialogActivityDate: string
     lastUserActivityDate: string
     newMessagesCount: number
     photo: string | null
     userName: string
+    userId: number
 }
 
-const Dialog: FC<PropsType> = ({photo, userName, lastUserActivityDate, newMessagesCount}) => {
+const Dialog: FC<PropsType> = ({photo, userName, lastUserActivityDate, newMessagesCount, userId}) => {
+    const dispatch = useDispatch();
+    const formattedDate = lastUserActivityDate.substr(5, 5).split('-').join('.') + ' в '
+        + lastUserActivityDate.substr(11, 5);
+
+    const handleSelect = () => {
+        dispatch(getDialogMessages(userId))
+    }
+
     return (
-        <List.Item>
-            <List.Item.Meta
-                avatar={<Avatar size={'large'} src={photo}/>}
-                title={userName}
-                description={
-                    <span>
-                        {lastUserActivityDate}
-                    </span>
-                }
-            />
+        <DialogItem onClick={handleSelect}>
+            <Col>
+                <Avatar size={'large'} src={photo}/>
+            </Col>
+            <DialogItemInfo>
+                <span>{userName}</span>
+                <DialogDate>{formattedDate}</DialogDate>
+            </DialogItemInfo>
             <DialogItemRight>
-                <span style={{color: 'gray'}}>{newMessagesCount} </span>
-                <CloseCircleOutlined onClick={() => {}}/>
+                <NewMessagesCount>{newMessagesCount} </NewMessagesCount>
+                <CloseCircleOutlined onClick={() => {
+                }}/>
             </DialogItemRight>
-        </List.Item>
+        </DialogItem>
     );
 }
 

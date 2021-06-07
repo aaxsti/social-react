@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
-import {Avatar, List} from 'antd';
+import {Avatar, Col, Row} from 'antd';
 import {HeartTwoTone} from "@ant-design/icons";
 import {actions} from '../../../../redux/profile-reducer';
-import {DeletePostButton, LikeElement, PostBlock} from './Post.styled';
+import {DeletePostButton, PostActionsBlock, PostBlock, PostDate, PostInfo, PostText} from './Post.styled';
 
 type PropsType = {
     message: string
@@ -40,25 +40,29 @@ const Post: React.FC<PropsType> = ({message, likesCount, date, id, profileImage,
 
     return (
         <PostBlock>
-            <List.Item>
-                <List.Item.Meta
-                    avatar={<Avatar src={profileImage} size={{xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 80}}/>}
-                    title={message}
-                    description={
-                        <span>
-                                {formattedDate}
-                            <LikeElement><HeartTwoTone
-                                onClick={!isLiked ? like : unlike}
-                                twoToneColor="#1890ff"/> {localLikesCount}
-                                </LikeElement>
-                            </span>
-                    }
-                />
-                <DeletePostButton onClick={deletePostCallback}/>
-            </List.Item>
+            <Row>
+                <Col>
+                    <Avatar src={profileImage} size={{xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 80}}/>
+                </Col>
+                <PostInfo>
+                    <PostDate>{formattedDate}</PostDate>
+                    <PostText>{message}</PostText>
+                </PostInfo>
+                <PostActionsBlock>
+                    <Col>
+                        {localLikesCount} <HeartTwoTone
+                            onClick={!isLiked ? like : unlike}
+                            twoToneColor="#1890ff"
+                        />
+                    </Col>
+                    &nbsp;
+                    <Col>
+                        <DeletePostButton onClick={deletePostCallback}/>
+                    </Col>
+                </PostActionsBlock>
+            </Row>
         </PostBlock>
     )
 };
 
 export default Post;
-

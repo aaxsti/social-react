@@ -10,13 +10,15 @@ type PropsType = {
 }
 
 const News: FC<PropsType> = ({title, image, description, publishedAt}) => {
+    const formattedPublishedAt = publishedAt.split('-').reverse().join('.');
+
     return (
         <>
             <NewsItem>
                 <div>
                     <div>
                         <h3>{title}</h3>
-                        <h4>{publishedAt}</h4>
+                        <h4>{formattedPublishedAt}</h4>
                     </div>
                     <NewsItemDescription>
                         <p>{description}</p>

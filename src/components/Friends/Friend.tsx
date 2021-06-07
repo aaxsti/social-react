@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {UserType} from "../../../types/types";
+import {UserType} from "../../types/types";
 import Meta from "antd/es/card/Meta";
-import userPhoto from "../../../assets/images/user.png";
+import userPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
 import {FriendElement, FriendElementCard} from './Friend.styled';
 

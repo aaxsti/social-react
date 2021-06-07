@@ -1,10 +1,10 @@
 import React, {FC, useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/store/redux-store";
 import Message from "./Message/Message";
+import {selectChatMessages} from "../../../selectors/chat-selectors";
 
 const Messages: FC = () => {
-    const messages = useSelector((state: AppStateType) => state.chat.messages)
+    const messages = useSelector(selectChatMessages)
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
     const [isAutoScroll, setIsAutoScroll] = useState(false)
 
@@ -25,7 +25,7 @@ const Messages: FC = () => {
 
     return (
         <div style={{height: '400px', width: '500px', overflowY: 'auto'}} onScroll={scrollHandler}>
-            {messages.map((m, index) => <Message key={index} message={m}/>)}
+            {messages.map((m) => <Message key={m.id} message={m}/>)}
             <div ref={messagesAnchorRef}>
 
             </div>

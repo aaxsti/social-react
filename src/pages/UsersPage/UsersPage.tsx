@@ -15,7 +15,6 @@ import {useHistory} from "react-router-dom";
 import * as queryString from "querystring";
 import Preloader from "../../components/common/Preloader/Preloader";
 import {UserOutlined} from "@ant-design/icons";
-import {List} from "antd";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {PaginatorWrapper, UserList, UsersPageWrapper } from "./UsersPage.styles";
 
@@ -106,7 +105,6 @@ const UsersPage: FC<PropsType> = () => {
             />
 
             <UserList>
-                <List size={'large'}>
                     {users.map(u => <User
                         user={u}
                         key={u.id}
@@ -114,7 +112,6 @@ const UsersPage: FC<PropsType> = () => {
                         unfollow={userUnfollow}
                         follow={userFollow}
                     />)}
-                </List>
             </UserList>
 
             <PaginatorWrapper

@@ -34,9 +34,8 @@ export type UserType = {
     status: string
     photos: PhotosType
 }
-export type MessageType = {
-    id: number
-    message: string
+export type DialogMessageType = {
+
 }
 export type NewsElementType = {
     title: string

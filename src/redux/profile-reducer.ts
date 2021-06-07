@@ -20,7 +20,7 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
     switch (action.type) {
         case 'SN/PROFILE/ADD_POST':
             let newPost = {
-                id: Math.floor(Math.random() * 1000),
+                id: Math.floor(Math.random() * 100000),
                 message: action.newPostText,
                 likesCount: 0,
                 date: new Date()

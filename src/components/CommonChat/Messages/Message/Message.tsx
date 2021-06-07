@@ -3,6 +3,7 @@ import {ChatMessageAPIType} from "../../../../api/chat-api";
 import userPhoto from "../../../../assets/images/user.png";
 
 const Message: FC<{ message: ChatMessageAPIType }> = React.memo(({message}) => {
+    console.log("message")
     return (
         <div>
 

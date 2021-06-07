@@ -8,16 +8,15 @@ import {UpOutlined} from "@ant-design/icons";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import UsersPage from '../../pages/UsersPage/UsersPage';
 import { AppContentWrapper, BackTopStyled } from './AppContent.styled';
+import DialogsPage from "../../pages/DialogsPage/DialogsPage";
 
 const ProfilePage = React.lazy(() => import('../../pages/ProfilePage/ProfilePage'))
-const ChatPage = React.lazy(() => import('../../pages/ChatPage/ChatPage'))
 const NewsPage = React.lazy(() => import('../../pages/NewsPage/NewsPage'))
 const FriendsPage = React.lazy(() => import('../../pages/FriendsPage/FriendsPage'))
 const InfoPage = React.lazy(() => import('../../pages/InfoPage/InfoPage'))
 const CommonChatPage = React.lazy(() => import('../../pages/CommonChatPage/CommonChatPage'))
 
 const SuspendedProfilePage = withSuspense(ProfilePage)
-const SuspendedChatPage = withSuspense(ChatPage)
 const SuspendedNewsPage = withSuspense(NewsPage)
 const SuspendedFriendsPage = withSuspense(FriendsPage)
 const SuspendedInfoPage = withSuspense(InfoPage)
@@ -34,7 +33,7 @@ const AppContent: FC<PropsType> = () => {
                 <Route path='/friends' render={() => <SuspendedFriendsPage/>}/>
                 <Route path='/login' render={() => <LoginPage/>}/>
                 <Route path='/signup' render={() => <SignUpPage/>}/>
-                <Route path='/chat' render={() => <SuspendedChatPage/>}/>
+                <Route path='/dialogs' render={() => <DialogsPage/>}/>
                 <Route path='/commonChat' render={() => <SuspendedCommonChatPage/>}/>
                 <Route path='/info' render={() => <SuspendedInfoPage/>}/>
                 <Route path='*' render={() => <ErrorPage/>}/>

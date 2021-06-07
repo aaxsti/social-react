@@ -1,17 +1,34 @@
 import styled from "styled-components";
 import {CloseCircleOutlined} from "@ant-design/icons";
+import {Col} from "antd";
 
 export const PostBlock = styled.div`
   background-color: #f0f2f5;
   border-radius: 2px;
   margin-bottom: 10px;
-`
-
-export const LikeElement = styled.div`
-  padding-top: 3px;
+  padding: 15px;
 `
 
 export const DeletePostButton = styled(CloseCircleOutlined)`
   float: right;
   font-size: 20px;
+`
+
+export const PostInfo = styled(Col)`
+  padding-left: 30px;
+  padding-top: 10px;
+`
+
+export const PostDate = styled.span`
+  color: gray;
+  font-size: 13px;
+`
+
+export const PostText = styled.p`
+  word-wrap: break-word;
+  width: 600px;
+`
+
+export const PostActionsBlock = styled.div`
+  font-size: 16px;
 `
