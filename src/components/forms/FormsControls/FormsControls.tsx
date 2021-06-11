@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import styles from "./FormsControls.module.css";
 import {Field, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
-import {FieldValidatorType} from "../../../utils/validators/validators";
+import {FieldValidatorType} from "../../../utils/validators";
 import TextArea from "antd/es/input/TextArea";
 import {Input} from "antd";
 

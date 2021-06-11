@@ -12,6 +12,6 @@ export const DialogChatWindow = styled.div`
 
 export const DialogMessagesBlock = styled(Col)`
   padding-left: 20px;
-  height: 445px;
+  height: 515px;
   width: 450px;
 `

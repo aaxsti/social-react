@@ -1,7 +1,7 @@
 import {InjectedFormProps, reduxForm} from "redux-form";
 import style from "../FormsControls/FormsControls.module.css";
 import {createField, GetStringKeys, InputField} from "../FormsControls/FormsControls";
-import {required} from "../../../utils/validators/validators";
+import {required} from "../../../utils/validators";
 import React, {FC} from "react";
 import {LoginFormOwnProps, LoginFormValuesType} from "../../../pages/LoginPage/LoginPage";
 import {Button} from "antd";

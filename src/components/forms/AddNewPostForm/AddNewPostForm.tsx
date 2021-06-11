@@ -1,6 +1,6 @@
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, GetStringKeys, Textarea} from "../FormsControls/FormsControls";
-import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {maxLengthCreator, required} from "../../../utils/validators";
 import React, {FC} from "react";
 import {Button} from "antd";
 import styled from "styled-components";

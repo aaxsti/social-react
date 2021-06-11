@@ -11,7 +11,7 @@ import {
     ProfileDataFormWrapper,
     SaveFormButton
 } from './ProfileDataForm.styled'
-import {maxLengthCreator} from "../../../utils/validators/validators";
+import {maxLengthCreator} from "../../../utils/validators";
 
 type PropsType = {
     profile: ProfileType

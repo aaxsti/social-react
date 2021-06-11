@@ -7,11 +7,9 @@ import {actions} from "../../../redux/profile-reducer";
 import {MyPostsHeader, StyledDivider } from './ProfilePosts.styled';
 import {List} from "antd";
 
-type PropsType = {}
-
 const months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октябля", "Ноября", "Декабря"];
 
-const ProfilePosts: FC<PropsType> = () => {
+const ProfilePosts: FC = () => {
     const posts = useSelector(selectProfilePosts)
     const profileImage = useSelector(selectProfileImage)
 

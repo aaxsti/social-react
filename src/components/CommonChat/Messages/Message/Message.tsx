@@ -9,7 +9,7 @@ const Message: FC<{ message: ChatMessageAPIType }> = ({message}) => {
                      style={{width: '30px', borderRadius: 15}}/>
                 <b style={{width: '30px', paddingLeft: 7}}>{message.userName}</b>
                 <br/>
-                {message.message}
+                <span style={{paddingLeft: 5}}>{message.message}</span>
             </div>
     )
 }

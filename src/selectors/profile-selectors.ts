@@ -20,5 +20,5 @@ export const selectProfilePosts = createSelector(
 
 export const selectProfileImage = createSelector(
     [selectProfile],
-    selectProfile => selectProfile?.photos.large
+    selectProfile => selectProfile?.photos?.large
 )

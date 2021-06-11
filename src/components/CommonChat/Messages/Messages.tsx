@@ -2,6 +2,16 @@ import React, {FC, useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import Message from "./Message/Message";
 import {selectChatMessages} from "../../../selectors/chat-selectors";
+import styled from "styled-components";
+
+export const CommonMessages = styled.div`
+  height: 500px;
+  border-radius: 2px;
+  width: 500px;
+  overflow-y: auto;
+  background-color: #f3f3f7;
+  border: 1px #dddede solid
+`
 
 const Messages: FC = () => {
     const messages = useSelector(selectChatMessages)
@@ -24,12 +34,12 @@ const Messages: FC = () => {
     }, [messages])
 
     return (
-        <div style={{height: '500px', borderRadius: 2, width: '500px', overflowY: 'auto', backgroundColor: '#f0f2f5', border: '1px #dddede solid'}} onScroll={scrollHandler}>
+        <CommonMessages onScroll={scrollHandler}>
             {messages.map((m) => <Message key={m.id} message={m}/>)}
             <div ref={messagesAnchorRef}>
 
             </div>
-        </div>
+        </CommonMessages>
     )
 }
 

@@ -22,7 +22,7 @@ export const selectDialogUser = createSelector(
 export const selectUserName = (senderId: number) => createSelector(
     [selectDialogs, selectAuthorizedUserId],
     (selectDialogs, userId) => {
-        if (senderId === userId) return 'Вы'
+        if (senderId === userId) return undefined
         else return selectDialogs.find((dialog) => dialog.id === senderId)?.userName
     }
 )

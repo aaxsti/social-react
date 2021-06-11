@@ -2,9 +2,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectDialogUser} from "../../../selectors/dialogs-selectors";
 import React, {useState} from "react";
 import {sendDialogMessage} from "../../../redux/dialogs-reducer";
-import {Button, Col, Row} from "antd";
-import TextArea from "antd/lib/input/TextArea";
+import {Button, Row} from "antd";
 import {SendOutlined} from "@ant-design/icons";
+import {AddMessageFormElement} from "../AddMessageForm/AddMessageForm.styled";
+import {AddDialogMessageFormTextArea} from "./AddDialogMessageForm.styled";
 
 const AddDialogMessageForm = () => {
     const selectedUser = useSelector(selectDialogUser)
@@ -23,17 +24,18 @@ const AddDialogMessageForm = () => {
     return (
         <form>
             <Row>
-                <Col style={{paddingTop: 20}}>
-                    <TextArea
+                <AddMessageFormElement>
+                    <AddDialogMessageFormTextArea
                         autoSize={true}
-                        style={{height: 30, width: 384}}
                         onChange={(e) => setMessage(e.currentTarget.value)}
                         value={message}>
-                    </TextArea>
-                </Col>
-                <Col style={{paddingTop: 20}}>
-                    <Button onClick={sendMessageHandler}><SendOutlined/></Button>
-                </Col>
+                    </AddDialogMessageFormTextArea>
+                </AddMessageFormElement>
+                <AddMessageFormElement>
+                    <Button onClick={sendMessageHandler}>
+                        <SendOutlined/>
+                    </Button>
+                </AddMessageFormElement>
             </Row>
         </form>
     );
