@@ -3,6 +3,7 @@ import {FormAction, stopSubmit} from "redux-form";
 import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
 import {authAPI} from "../api/auth-api";
 import {profileAPI} from "../api/profile-api";
+import { toast } from "react-toastify";
 
 let initialState = {
     userId: null as number | null,
@@ -33,9 +34,6 @@ export const actions = {
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
     let meData = await authAPI.me();
-
-
-
     if (meData.resultCode === ResultCodesEnum.Success) {
         let myAvatar = await profileAPI.getProfile(meData.data.id);
         const avatar = myAvatar.photos.small;
@@ -50,14 +48,13 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
     if (data.resultCode === ResultCodesEnum.Success) {
         await dispatch(getAuthUserData());
     } else {
-        let message = data.messages.length > 0 ? data.messages[0] : "Some error";
-        dispatch(stopSubmit("login", {_error: message}));
+        toast.info(data.messages.length > 0 ? data.messages[0] : "Some error")
     }
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-    let response = await authAPI.logout();
-    if (response.data.resultCode === 0) {
+    let data = await authAPI.logout();
+    if (data.resultCode === 0) {
         dispatch(actions.setAuthUserData(null, null, null, false, null));
     }
 }

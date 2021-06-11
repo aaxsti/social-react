@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
-import {sendMessage} from "../../../redux/chat-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {selectDialogUser} from "../../../selectors/dialogs-selectors";
+import React, {useState} from "react";
+import {sendDialogMessage} from "../../../redux/dialogs-reducer";
 import {Button, Col, Row} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import {SendOutlined} from "@ant-design/icons";
 
 const AddDialogMessageForm = () => {
+    const selectedUser = useSelector(selectDialogUser)
+
     const [message, setMessage] = useState('')
     const dispatch = useDispatch()
 
@@ -13,22 +16,26 @@ const AddDialogMessageForm = () => {
         if (!message) {
             return;
         }
-        dispatch(sendMessage(message))
+        dispatch(sendDialogMessage(selectedUser, message))
         setMessage('')
     }
 
     return (
-        <Row>
-            <Col style={{padding: '20px 0 0 0'}}>
-                <TextArea onKeyUp={sendMessageHandler} autoSize={true} style={{height: 30}} onChange={(e) => setMessage(e.currentTarget.value)}
-                          value={message}>
-
-                </TextArea>
-            </Col>
-            <Col style={{padding: '20px 0 0 0'}}>
-                <Button onClick={sendMessageHandler}><SendOutlined /></Button>
-            </Col>
-        </Row>
+        <form>
+            <Row>
+                <Col style={{paddingTop: 20}}>
+                    <TextArea
+                        autoSize={true}
+                        style={{height: 30, width: 384}}
+                        onChange={(e) => setMessage(e.currentTarget.value)}
+                        value={message}>
+                    </TextArea>
+                </Col>
+                <Col style={{paddingTop: 20}}>
+                    <Button onClick={sendMessageHandler}><SendOutlined/></Button>
+                </Col>
+            </Row>
+        </form>
     );
 }
 

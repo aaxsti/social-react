@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {Col, List} from "antd";
 
 export const DialogsListCol = styled(Col)`
-  padding-right: 15px;
+  padding-right: 20px;
   border-right: 1px #ebedee solid;
 `
 

@@ -62,4 +62,4 @@ export const ProfilePage: FC<PropsType> = ({history, match}) => {
     )
 }
 
-export default withAuthRedirect(withRouter(ProfilePage));
+export default React.memo(withAuthRedirect(withRouter(ProfilePage)));

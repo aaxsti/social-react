@@ -9,7 +9,7 @@ type PropsType = {
     message: string
     likesCount: number
     date: Date
-    id: number
+    id: string
     profileImage: string | null | undefined
     months: Array<string>
 }
@@ -65,4 +65,4 @@ const Post: React.FC<PropsType> = ({message, likesCount, date, id, profileImage,
     )
 };
 
-export default Post;
+export default React.memo(Post);

@@ -5,9 +5,7 @@ import {ExceptionOutlined} from "@ant-design/icons";
 import News from "../../components/News/News";
 import {selectNews} from "../../selectors/news-selectors";
 
-type PropsType = {}
-
-const NewsPage: FC<PropsType> = () => {
+const NewsPage: FC = () => {
     const news = useSelector(selectNews)
 
     let newsElements = news.map((item, index) => <News

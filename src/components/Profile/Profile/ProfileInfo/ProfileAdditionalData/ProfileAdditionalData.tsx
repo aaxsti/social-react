@@ -21,7 +21,7 @@ type ProfileAdditionalDataPropsType = {
 
 const ProfileAdditionalData: FC<ProfileAdditionalDataPropsType> = ({profile}) => {
     return (
-        <div>
+        <>
             <AdditionalDataDivider/>
             <AdditionalDataBlock>
                 <Row>
@@ -78,8 +78,7 @@ const ProfileAdditionalData: FC<ProfileAdditionalDataPropsType> = ({profile}) =>
                 </span>
                 }
             </AboutMeBlock>
-
-        </div>
+        </>
     )
 }
 

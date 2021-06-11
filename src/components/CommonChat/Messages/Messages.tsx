@@ -24,7 +24,7 @@ const Messages: FC = () => {
     }, [messages])
 
     return (
-        <div style={{height: '400px', width: '500px', overflowY: 'auto'}} onScroll={scrollHandler}>
+        <div style={{height: '500px', borderRadius: 2, width: '500px', overflowY: 'auto', backgroundColor: '#f0f2f5', border: '1px #dddede solid'}} onScroll={scrollHandler}>
             {messages.map((m) => <Message key={m.id} message={m}/>)}
             <div ref={messagesAnchorRef}>
 

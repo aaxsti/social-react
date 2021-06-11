@@ -11,12 +11,17 @@ import {
     ProfileDataFormWrapper,
     SaveFormButton
 } from './ProfileDataForm.styled'
+import {maxLengthCreator} from "../../../utils/validators/validators";
 
 type PropsType = {
     profile: ProfileType
 }
 
 type ProfileTypeKeys = GetStringKeys<ProfileType>;
+
+const maxLength150 = maxLengthCreator(150)
+const maxLength50 = maxLengthCreator(50)
+const maxLength300 = maxLengthCreator(300)
 
 const ProfileDataForm: FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({handleSubmit, profile, error}) => {
     return (
@@ -31,7 +36,7 @@ const ProfileDataForm: FC<InjectedFormProps<ProfileType, PropsType> & PropsType>
                             {Object.keys(profile.contacts).map(key => {
                                 return <FormElement key={key}>
                                     <span>{key[0].toUpperCase() + key.substr(1)}
-                                        {createField(key, "contacts." + key, [], InputField)}
+                                        {createField(key, "contacts." + key, [maxLength150], InputField)}
                                     </span>
                                 </FormElement>
                             })}
@@ -45,7 +50,7 @@ const ProfileDataForm: FC<InjectedFormProps<ProfileType, PropsType> & PropsType>
 
                         <FormElement>
                             <span>Никнейм</span>
-                            {createField<ProfileTypeKeys>("Никнейм...", "fullName", [], InputField)}
+                            {createField<ProfileTypeKeys>("Никнейм...", "fullName", [maxLength50], InputField)}
                         </FormElement>
                         {/*<div>*/}
                         {/*    <b>Looking for a job</b>*/}
@@ -53,11 +58,11 @@ const ProfileDataForm: FC<InjectedFormProps<ProfileType, PropsType> & PropsType>
                         {/*</div>*/}
                         <FormElement>
                             <span>Профессиональные навыки</span>
-                            {createField<ProfileTypeKeys>("Профессиональные навыки...", "lookingForAJobDescription", [], Textarea)}
+                            {createField<ProfileTypeKeys>("Профессиональные навыки...", "lookingForAJobDescription", [maxLength300], Textarea)}
                         </FormElement>
                         <FormElement>
                             <span>О себе</span>
-                            {createField<ProfileTypeKeys>("О себе...", "aboutMe", [], Textarea)}
+                            {createField<ProfileTypeKeys>("О себе...", "aboutMe", [maxLength300], Textarea)}
                         </FormElement>
 
                             <SaveFormButton htmlType={'submit'} onClick={() => {

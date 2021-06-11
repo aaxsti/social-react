@@ -32,4 +32,4 @@ const Friend: FC<PropsType> = ({friend}) => {
     )
 };
 
-export default Friend;
+export default React.memo(Friend);

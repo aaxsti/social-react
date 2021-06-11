@@ -73,7 +73,7 @@ const ProfileInfo: FC<PropsType> = ({isOwner, profile, userId}) => {
     }
 
     return (
-        <div>
+        <>
             <Row>
                 <AvatarImageWrapperCol>
                     <AvatarImage src={profile.photos.large || noPhotoPic}/>
@@ -134,7 +134,7 @@ const ProfileInfo: FC<PropsType> = ({isOwner, profile, userId}) => {
                         </>
                         :
                         <Button onClick={handleCreateDialog}>
-                            <NavLink to={'/chat'}>
+                            <NavLink to={'/dialogs'}>
                                 <MessageOutlined/> Написать сообщение
                             </NavLink>
                         </Button>
@@ -164,8 +164,8 @@ const ProfileInfo: FC<PropsType> = ({isOwner, profile, userId}) => {
                     ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
                     : <ProfileAdditionalData profile={profile}/>}
             </div>
-        </div>
+        </>
     )
 };
 
-export default ProfileInfo;
+export default React.memo(ProfileInfo);

@@ -69,4 +69,4 @@ const User: FC<PropsType> = ({user, followingInProgress, unfollow, follow}) => {
     )
 }
 
-export default User;
+export default React.memo(User);

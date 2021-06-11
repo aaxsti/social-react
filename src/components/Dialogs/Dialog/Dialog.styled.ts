@@ -20,14 +20,15 @@ export const DialogItem = styled(Row)`
     opacity: 1;
     background-color: #ebedee;
   }
+  &:focus {
+    background-color: #ebedee;
+  }
   cursor: pointer;
+  border-bottom: 1px #eef0f0 solid;
 `
 
 export const DialogItemRight = styled(Col)`
   font-size: 16px;
   margin-left: auto;
-`
-
-export const NewMessagesCount = styled.span`
   color: gray;
 `

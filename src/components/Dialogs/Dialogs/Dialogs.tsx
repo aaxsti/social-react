@@ -1,17 +1,9 @@
-import React, {FC, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {selectDialogs} from "../../../selectors/dialogs-selectors";
-import {getDialogs} from "../../../redux/dialogs-reducer";
-import Dialog from "../Dialog/Dialog";
+import React, {FC} from "react";
+import {DialogType} from "../../../types/types";
 import {DialogsList, DialogsListCol} from "./Dialogs.styled";
+import Dialog from "../Dialog/Dialog";
 
-const Dialogs: FC = () => {
-    const dialogs = useSelector(selectDialogs);
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getDialogs())
-    }, [dispatch]);
+const Dialogs: FC<{ dialogs: Array<DialogType> }> = ({dialogs}) => {
 
     return (
         <DialogsListCol>

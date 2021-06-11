@@ -20,14 +20,14 @@ type AddPostFormValuesKeysType = GetStringKeys<AddPostFormValuesType>
 
 export const AddNewPostForm: FC<InjectedFormProps<AddPostFormValuesType & PropsType> & PropsType> = (props) => {
     return (
-        <div>
+        <>
             <form onSubmit={props.handleSubmit}>
                 {createField<AddPostFormValuesKeysType>('Что у вас нового?', 'newPostText', [required, maxLength400], Textarea)}
                 <AddPostButtonWrapper>
                     <Button htmlType="submit">Опубликовать</Button>
                 </AddPostButtonWrapper>
             </form>
-        </div>
+        </>
     )
 }
 

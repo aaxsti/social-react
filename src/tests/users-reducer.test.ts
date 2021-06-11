@@ -31,7 +31,6 @@ beforeEach(() => {
 })
 
 test("follow success", () => {
-
     const newState = usersReducer(state, actions.followSuccess(1))
 
     expect(newState.users[0].followed).toBeFalsy();
@@ -39,7 +38,6 @@ test("follow success", () => {
 })
 
 test("unfollow success", () => {
-
     const newState = usersReducer(state, actions.followSuccess(3))
 
     expect(newState.users[2].followed).toBeTruthy();

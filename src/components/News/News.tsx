@@ -32,4 +32,4 @@ const News: FC<PropsType> = ({title, image, description, publishedAt}) => {
     )
 }
 
-export default News;
+export default React.memo(News);

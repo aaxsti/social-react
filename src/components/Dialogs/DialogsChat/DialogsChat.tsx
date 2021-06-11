@@ -1,13 +1,27 @@
-import React from 'react';
-import DialogMessages from "./DialogMessages/DialogMessages";
+import {useSelector} from "react-redux";
+import {selectDialogMessages} from "../../../selectors/dialogs-selectors";
+import {DialogChatWindow, DialogMessagesBlock} from "./DialogsChat.styled";
+import React from "react";
+import DialogMessage from "./DialogMessage/DialogMessage";
 import AddDialogMessageForm from "../../forms/AddDialogMessageForm/AddDialogMessageForm";
-import {DialogMessagesBlock} from './DialogsChat.styled';
 
 const DialogsChat = () => {
+    const messages = useSelector(selectDialogMessages)
     return (
         <DialogMessagesBlock>
-            <DialogMessages/>
+
+            <DialogChatWindow>
+                {
+                    messages.map(m => <DialogMessage
+                        key={m.id}
+                        messageText={m.body}
+                        senderId={m.senderId}
+                    />)
+                }
+            </DialogChatWindow>
+
             <AddDialogMessageForm/>
+
         </DialogMessagesBlock>
     );
 }

@@ -25,8 +25,9 @@ export const actions = {
 type ThunkType = ThunkAction<any, AppStateType, unknown, ActionsType>
 
 export const initializeApp = (): ThunkType => (dispatch) => {
-    let promise = dispatch(getAuthUserData());
-    Promise.all([promise])
+    let getAuthUserDataPromise = dispatch(getAuthUserData());
+
+    Promise.all([getAuthUserDataPromise])
         .then(() => {
         dispatch(actions.initializedSuccess());
     });

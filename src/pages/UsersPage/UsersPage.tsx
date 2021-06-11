@@ -23,7 +23,6 @@ type PropsType = {}
 type QueryParamsType = { term?: string; page?: string; friend?: string };
 
 const UsersPage: FC<PropsType> = () => {
-
     const users = useSelector(getUsers)
     const totalUsersCount = useSelector(getTotalUsersCount)
     const currentPage = useSelector(getCurrentPage)
@@ -70,6 +69,10 @@ const UsersPage: FC<PropsType> = () => {
         })
     }, [filter, currentPage])
 
+    if (!totalUsersCount) {
+        return <Preloader/>
+    }
+
     const onPageChanged = (pageNumber: number) => {
         dispatch(requestUsers(pageNumber, pageSize, filter));
     }
@@ -84,10 +87,6 @@ const UsersPage: FC<PropsType> = () => {
 
     const userUnfollow = (userId: number) => {
         dispatch(unfollow(userId))
-    }
-
-    if (!users) {
-        return <Preloader/>
     }
 
     return (

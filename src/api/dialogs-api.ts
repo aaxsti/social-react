@@ -1,4 +1,5 @@
 import {instance, APIResponseType, GetItemsType} from "./api";
+import {DialogMessageType} from "../types/types";
 
 export const dialogsAPI = {
     startDialog(userId: number) {
@@ -10,7 +11,7 @@ export const dialogsAPI = {
     },
 
     getDialogMessages(userId: number) {
-        return instance.get<GetItemsType>(`dialogs/${userId}/messages`).then(res => res.data);
+        return instance.get<GetItemsType<DialogMessageType>>(`dialogs/${userId}/messages`).then(res => res.data);
     },
 
     sendDialogMessage(userId: number, body: string) {

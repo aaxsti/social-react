@@ -5,7 +5,7 @@ export const required: FieldValidatorType = (value) => {
     return "Заполните поле";
 }
 
-export const maxLengthCreator = (maxLength: number): FieldValidatorType => (value)=> {
+export const maxLengthCreator = (maxLength: number): FieldValidatorType => (value) => {
     if (value && value.length > maxLength) return `Максимальная длина: ${maxLength} символов`;
     return undefined;
 }

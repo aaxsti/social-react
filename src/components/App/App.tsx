@@ -10,8 +10,10 @@ import AppHeader from "../AppHeader/AppHeader";
 import Preloader from "../common/Preloader/Preloader";
 import {GlobalPreloader, MainFrameWrapper} from './App.styled';
 import {initializeApp} from "../../redux/app-reducer";
+import {ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
-export const App: FC<PropsType> = () => {
+export const App: FC = () => {
     const initialized = useSelector(selectInitialized)
 
     const dispatch = useDispatch()
@@ -25,7 +27,6 @@ export const App: FC<PropsType> = () => {
     }
 
     return (
-        <div>
         <Layout>
             <AppHeader/>
             <MainFrameWrapper>
@@ -33,11 +34,19 @@ export const App: FC<PropsType> = () => {
                 <AppContent/>
             </MainFrameWrapper>
             <AppFooter/>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Layout>
-        </div>
     )
 }
 
-type PropsType = {}
-
-export default App;
+export default React.memo(App);

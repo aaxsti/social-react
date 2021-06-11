@@ -1,7 +1,7 @@
-import {NewsType} from "../types/types";
+import {NewsElementType} from "../types/types";
 import {InferActionsTypes} from "./store/redux-store";
 
-let initialState: NewsType = {
+let initialState = {
     news: [
         {
             title: 'Обновлен дизайн приложения',
@@ -33,7 +33,7 @@ let initialState: NewsType = {
                 '"лайкать" созданные посты.',
             publishedAt: '25-02-2021'
         }
-    ]
+    ] as Array<NewsElementType>
 }
 
 const newsReducer = (state = initialState, action: ActionsType): InitialStateType => {

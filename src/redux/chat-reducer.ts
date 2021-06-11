@@ -24,6 +24,11 @@ const chatReducer = (state = initialState, action: ActionsType): InitialStateTyp
                 ...state,
                 status: action.payload.status
             }
+        case 'SN/chat/CLEAN_OUT_MESSAGES':
+            return {
+                ...state,
+                messages: []
+            }
         default:
             return state
     }
@@ -36,6 +41,9 @@ export const actions = {
     statusChanged: (status: StatusType) => ({
         type: 'SN/chat/STATUS_CHANGED', payload: {status}
     } as const),
+    cleanOutMessages: () => ({
+        type: 'SN/chat/CLEAN_OUT_MESSAGES'
+    } as const)
 }
 
 let _newMessageHandler: ((messages: ChatMessageAPIType[]) => void) | null = null
@@ -65,6 +73,7 @@ export const startMessagesListening = (): ThunkType => async (dispatch) => {
 }
 
 export const stopMessagesListening = (): ThunkType => async (dispatch) => {
+    await dispatch(actions.cleanOutMessages());
     chatAPI.unsubscribe('messages-received', newMessageHandlerCreator(dispatch))
     chatAPI.unsubscribe('status-changed', statusChangedHandlerCreator(dispatch))
     chatAPI.stop()

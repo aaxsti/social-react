@@ -17,13 +17,13 @@ export type APIResponseType<D = {}, RC = ResultCodesEnum> = {
     resultCode: RC
 }
 
+export type GetItemsType<D = {}> = {
+    items: Array<D>
+    totalCount: number
+    error: string | null
+}
+
 export enum ResultCodesEnum {
     Success = 0,
     Error = 1
-}
-
-export type GetItemsType = {
-    items: Array<UserType>
-    totalCount: number
-    error: string | null
 }

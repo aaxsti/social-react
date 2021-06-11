@@ -1,12 +1,9 @@
-import {Avatar, Col} from 'antd';
-import React, {FC} from 'react';
-import {CloseCircleOutlined} from "@ant-design/icons";
-import {
-    DialogDate,
-    DialogItem, DialogItemInfo, DialogItemRight, NewMessagesCount
-} from './Dialog.styled';
+import React, {FC} from "react";
 import {useDispatch} from "react-redux";
 import {getDialogMessages} from "../../../redux/dialogs-reducer";
+import {DialogDate, DialogItem, DialogItemInfo, DialogItemRight} from "./Dialog.styled";
+import {Avatar, Col} from "antd";
+import {CloseCircleOutlined} from "@ant-design/icons";
 
 type PropsType = {
     hasNewMessage: boolean
@@ -17,9 +14,19 @@ type PropsType = {
     userId: number
 }
 
-const Dialog: FC<PropsType> = ({photo, userName, lastUserActivityDate, newMessagesCount, userId}) => {
+const Dialog: FC<PropsType> = ({
+                                   photo,
+                                   userName,
+                                   lastUserActivityDate,
+                                   newMessagesCount,
+                                   userId
+                               }) => {
+
     const dispatch = useDispatch();
-    const formattedDate = lastUserActivityDate.substr(5, 5).split('-').join('.') + ' в '
+
+    const formattedDate = lastUserActivityDate
+            .substr(5, 5)
+            .split('-').join('.') + ' в '
         + lastUserActivityDate.substr(11, 5);
 
     const handleSelect = () => {
@@ -36,9 +43,8 @@ const Dialog: FC<PropsType> = ({photo, userName, lastUserActivityDate, newMessag
                 <DialogDate>{formattedDate}</DialogDate>
             </DialogItemInfo>
             <DialogItemRight>
-                <NewMessagesCount>{newMessagesCount} </NewMessagesCount>
-                <CloseCircleOutlined onClick={() => {
-                }}/>
+                <span>{newMessagesCount} </span>
+                <CloseCircleOutlined/>
             </DialogItemRight>
         </DialogItem>
     );

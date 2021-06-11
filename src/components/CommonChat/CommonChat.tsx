@@ -8,7 +8,6 @@ import {selectChatStatus} from "../../selectors/chat-selectors";
 const CommonChat: FC = () => {
 
     const dispatch = useDispatch()
-
     const status = useSelector(selectChatStatus)
 
     useEffect(() => {
@@ -19,7 +18,7 @@ const CommonChat: FC = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{marginLeft: 150}}>
             {status === 'error' && <div>Some error occurred. Please refresh the page</div>}
             <>
                 <Messages/>

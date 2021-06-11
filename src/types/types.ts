@@ -1,5 +1,5 @@
 export type PostType = {
-    id: number
+    id: string
     message: string
     likesCount: number
     date: Date
@@ -35,19 +35,20 @@ export type UserType = {
     photos: PhotosType
 }
 export type DialogMessageType = {
-
+    addedAt: string
+    body: string
+    id: string
+    recipientId: number
+    senderId: number
+    senderName: string
+    translatedBody: string | null
+    viewed: boolean
 }
 export type NewsElementType = {
     title: string
     imageUrl: string
     summary: string
     publishedAt: string
-}
-export type NewsType = {
-    news: Array<NewsElementType>
-}
-export type DialogsType = {
-    dialogs: Array<DialogType>
 }
 export type DialogType = {
     id: number

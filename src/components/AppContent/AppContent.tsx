@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import {Redirect, Route, RouteComponentProps, Switch, withRouter} from "react-router-dom";
-import {LoginPage} from "../../pages/LoginPage/LoginPage";
 import {SignUpPage} from "../../pages/SignUpPage/SignUpPage";
 import {BackTop} from "antd";
 import withSuspense from "../../hoc/withSuspense";
@@ -9,6 +8,7 @@ import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import UsersPage from '../../pages/UsersPage/UsersPage';
 import { AppContentWrapper, BackTopStyled } from './AppContent.styled';
 import DialogsPage from "../../pages/DialogsPage/DialogsPage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
 
 const ProfilePage = React.lazy(() => import('../../pages/ProfilePage/ProfilePage'))
 const NewsPage = React.lazy(() => import('../../pages/NewsPage/NewsPage'))
@@ -49,4 +49,4 @@ const AppContent: FC<PropsType> = () => {
 
 type PropsType = RouteComponentProps & {}
 
-export default withRouter(AppContent);
+export default React.memo(withRouter(AppContent));

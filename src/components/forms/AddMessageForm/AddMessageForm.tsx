@@ -6,7 +6,7 @@ import TextArea from "antd/lib/input/TextArea";
 import {SendOutlined} from "@ant-design/icons";
 import {selectChatStatus} from "../../../selectors/chat-selectors";
 
-const AddMessageForm: FC<{}> = ({}) => {
+const AddMessageForm: FC = () => {
     const [message, setMessage] = useState('')
     const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ const AddMessageForm: FC<{}> = ({}) => {
     return (
         <Row>
             <Col style={{padding: '20px 0 0 0'}}>
-                <TextArea autoSize={true} style={{width: 420, height: 30}} onChange={(e) => setMessage(e.currentTarget.value)}
+                <TextArea autoSize={true} style={{width: 454, height: 30}} onChange={(e) => setMessage(e.currentTarget.value)}
                           value={message}>
 
                 </TextArea>

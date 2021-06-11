@@ -21,7 +21,6 @@ const result: APIResponseType = {
     data: {}
 }
 
-// @ts-ignore
 userAPIMock.userFollow.mockReturnValue(Promise.resolve(result))
 userAPIMock.userUnfollow.mockReturnValue(Promise.resolve(result))
 

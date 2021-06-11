@@ -2,10 +2,11 @@ import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {updateStatus} from "../../../../../redux/profile-reducer";
 import {StatusInput, StatusText} from './ProfileStatus.styled';
+import {toast} from "react-toastify";
 
 type PropsType = {
     status: string
-    isOwner: boolean
+    isOwner?: boolean
 }
 
 const ProfileStatus: FC<PropsType> = (props) => {
@@ -24,8 +25,12 @@ const ProfileStatus: FC<PropsType> = (props) => {
     };
 
     const deactivateEditMode = () => {
-        setEditMode(false);
-        dispatch(updateStatus(status));
+        if (status.length > 50) {
+            toast.info('Статус слишком длинный')
+        } else {
+            setEditMode(false);
+            dispatch(updateStatus(status));
+        }
     }
 
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,24 +38,20 @@ const ProfileStatus: FC<PropsType> = (props) => {
     }
 
     return (
-        <div>
+        <>
             {!editMode &&
-            <div>
-                <StatusText onDoubleClick={activateEditMode}>
-                    {props.status || "----"}
-                </StatusText>
-            </div>
+            <StatusText onDoubleClick={activateEditMode}>
+                {props.status || "----"}
+            </StatusText>
             }
             {editMode &&
-            <div>
-                <StatusInput
-                    onChange={onStatusChange}
-                    autoFocus={true}
-                    onBlur={deactivateEditMode}
-                    value={status}/>
-            </div>
+            <StatusInput
+                onChange={onStatusChange}
+                autoFocus={true}
+                onBlur={deactivateEditMode}
+                value={status}/>
             }
-        </div>
+        </>
     )
 }
 

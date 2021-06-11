@@ -17,7 +17,8 @@ const ProfilePosts: FC<PropsType> = () => {
 
     const dispatch = useDispatch()
 
-    let postsElements = posts.reverse().map((p) => <Post
+    let postsElements = posts.reverse()
+        .map((p) => <Post
         months={months}
         profileImage={profileImage}
         message={p.message}
@@ -32,7 +33,7 @@ const ProfilePosts: FC<PropsType> = () => {
     };
 
     return (
-        <div>
+        <>
             <StyledDivider/>
             <MyPostsHeader>
                 Мои записи
@@ -41,7 +42,7 @@ const ProfilePosts: FC<PropsType> = () => {
             <List size={'large'}>
                 {postsElements}
             </List>
-        </div>
+        </>
     )
 }
 

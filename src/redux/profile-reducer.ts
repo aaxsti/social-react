@@ -1,14 +1,16 @@
-import {FormAction, stopSubmit} from "redux-form";
+import {FormAction} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
 import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
 import {profileAPI} from "../api/profile-api";
 import {ResultCodesEnum} from "../api/api";
+import {v4} from "uuid";
+import {toast} from "react-toastify";
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Это мой первый пост', likesCount: 25,
+        {id: v4(), message: 'Это мой первый пост', likesCount: 5,
             date: new Date(2021, 1, 21, 17, 55)},
-        {id: 2, message: 'Всем привет', likesCount: 15,
+        {id: v4(), message: 'Всем привет', likesCount: 2,
             date: new Date(2021, 3, 13, 13, 27)}
     ] as Array<PostType>,
     profile: null as ProfileType | null,
@@ -20,7 +22,7 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
     switch (action.type) {
         case 'SN/PROFILE/ADD_POST':
             let newPost = {
-                id: Math.floor(Math.random() * 100000),
+                id: v4(),
                 message: action.newPostText,
                 likesCount: 0,
                 date: new Date()
@@ -58,7 +60,7 @@ export const actions = {
     addPostActionCreator: (newPostText: string) => ({type: 'SN/PROFILE/ADD_POST', newPostText} as const),
     setUserProfile: (profile: ProfileType) => ({type: 'SN/PROFILE/SET_USER_PROFILE', profile} as const),
     setStatus: (status: string) => ({type: 'SN/PROFILE/SET_STATUS', status} as const),
-    deletePost: (postId: number) => ({type: 'SN/PROFILE/DELETE_POST', postId} as const),
+    deletePost: (postId: string) => ({type: 'SN/PROFILE/DELETE_POST', postId} as const),
     savePhotoSuccess: (photos: PhotosType) => ({type: 'SN/PROFILE/SAVE_PHOTO_SUCCESS', photos} as const)
 }
 
@@ -79,14 +81,18 @@ export const updateStatus = (status: string): ThunkType => async (dispatch) => {
             dispatch(actions.setStatus(status));
         }
     } catch (error) {
-        // Error
+        toast.info(error)
     }
 }
 
 export const savePhoto = (file: File): ThunkType => async (dispatch) => {
-    let data = await profileAPI.savePhoto(file);
-    if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(actions.savePhotoSuccess(data.data.photos));
+    try {
+        let data = await profileAPI.savePhoto(file);
+        if (data.resultCode === ResultCodesEnum.Success) {
+            dispatch(actions.savePhotoSuccess(data.data.photos));
+        }
+    } catch (error) {
+        toast.info("Отправленные данные некорректны")
     }
 }
 
@@ -97,10 +103,10 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch,
         if (userId != null) {
             dispatch(await getUserProfile(userId))
         } else {
-            throw new Error('userId can`t be null')
+            toast.info('userId can`t be null')
         }
     } else {
-        dispatch(stopSubmit("edit-profile", {_error: data.messages[0]}))
+        toast.info(data.messages[0])
         return Promise.reject(data.messages[0])
     }
 }

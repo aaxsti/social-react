@@ -9,9 +9,7 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {selectUserFriends, selectUserFriendsAmount} from "../../selectors/friends-selectors";
 import {FriendsPageHeader, FriendsSearchInput, SearchIcon} from "./FriendsPage.styled";
 
-type PropsType = {}
-
-const FriendsPage: FC<PropsType> = () => {
+const FriendsPage: FC = () => {
     const [searchTerm, setSearchTerm] = useState('')
 
     const friends = useSelector(selectUserFriends)
@@ -20,9 +18,9 @@ const FriendsPage: FC<PropsType> = () => {
 
     useEffect(() => {
         dispatch(requestFriends());
-    }, [friendsAmount])
+    }, [dispatch, friendsAmount])
 
-    if (!friends) {
+    if (!friendsAmount) {
         return <Preloader/>
     }
 

@@ -17,7 +17,7 @@ export type LoginFormValuesType = {
     email: string
 }
 
-export const LoginPage: FC = () => {
+const LoginPage: FC = () => {
 
     const isAuth = useSelector(selectIsAuth)
 
@@ -38,3 +38,5 @@ export const LoginPage: FC = () => {
         </div>
     )
 }
+
+export default React.memo(LoginPage);
