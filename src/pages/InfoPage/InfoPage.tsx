@@ -4,7 +4,7 @@ import AppInfoPic from "../../assets/images/app-info-pic.jpg";
 const InfoPage = () => {
     return (
         <div>
-            <img alt='App info picture'
+            <img alt='App info'
             src={AppInfoPic}
                  style={{width: '100%'}}/>
             <p style={{textAlign: 'center'}}>

@@ -17,7 +17,7 @@ const Friend: FC<PropsType> = ({friend}) => {
                     bordered={true}
                     hoverable
                     cover={<img
-                        alt="friend photo"
+                        alt="friend element"
                         src={friend.photos.large != null ? friend.photos.large : userPhoto}/>
                     }
                 >

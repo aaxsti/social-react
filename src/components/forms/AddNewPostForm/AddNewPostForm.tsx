@@ -14,20 +14,19 @@ const maxLength400 = maxLengthCreator(400);
 export type AddPostFormValuesType = {
     newPostText: string
 }
+
 type PropsType = {}
 
 type AddPostFormValuesKeysType = GetStringKeys<AddPostFormValuesType>
 
 export const AddNewPostForm: FC<InjectedFormProps<AddPostFormValuesType & PropsType> & PropsType> = (props) => {
     return (
-        <>
             <form onSubmit={props.handleSubmit}>
                 {createField<AddPostFormValuesKeysType>('Что у вас нового?', 'newPostText', [required, maxLength400], Textarea)}
                 <AddPostButtonWrapper>
                     <Button htmlType="submit">Опубликовать</Button>
                 </AddPostButtonWrapper>
             </form>
-        </>
     )
 }
 

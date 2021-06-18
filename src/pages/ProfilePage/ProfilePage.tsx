@@ -35,7 +35,6 @@ export const ProfilePage: FC<PropsType> = ({history, match}) => {
                 history.push("/login");
             }
         }
-
         if (!userId) {
             console.error("Id should exists in URI params or in state ('authorizedUserId')")
         } else {

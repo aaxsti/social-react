@@ -7,6 +7,6 @@ export const AddMessageFormElement = styled(Col)`
 `
 
 export const AddMessageFormTextArea = styled(TextArea)`
-  width: 454px;
+  width: 500px;
   height: 30px;
 `

@@ -12,9 +12,7 @@ import {
     IconsBlock,
     IconsBlockElement} from "./AppFooter.styled";
 
-type PropsType = {}
-
-const AppFooter: FC<PropsType> = () => {
+const AppFooter: FC= () => {
     return (
         <FooterWrapper>
             <AboutBlock>

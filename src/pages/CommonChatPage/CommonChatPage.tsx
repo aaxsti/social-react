@@ -21,7 +21,7 @@ const CommonChatPage = () => {
         return () => {
             dispatch(stopMessagesListening());
         }
-    }, [])
+    }, [dispatch])
 
     return (
         <div>

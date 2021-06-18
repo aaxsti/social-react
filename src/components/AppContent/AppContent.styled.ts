@@ -15,7 +15,7 @@ export const AppContentWrapper = styled(Content)`
   border-radius: 2px;
   margin: 0 0 0 50px;
   padding: 30px;
-  min-height: 300px;
+  min-height: 700px;
   display: flex;
   background-color: white
 `

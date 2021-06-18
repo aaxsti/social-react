@@ -1,9 +1,9 @@
 import React, {FC} from "react";
 import {useSelector} from "react-redux";
-import {selectUserName} from "../../../../selectors/dialogs-selectors";
 import {Avatar} from "antd";
 import {selectAuthorizedUserAvatar} from "../../../../selectors/auth-selectors";
 import { DialogMessageElement, DialogMessageText } from "./DialogMessage.styled";
+import {selectUserName} from "../../../../selectors/dialogs-selectors";
 
 type DialogMessagePropsType = {
     messageText: string
@@ -17,7 +17,8 @@ const DialogMessage: FC<DialogMessagePropsType> = ({messageText, senderId}) => {
 
     return (
         <DialogMessageElement>
-            <Avatar size={'large'} src={profileImage} alt="Dialog message photo"/>
+            <Avatar size={'large'} src={profileImage} alt="Dialog message"/>&nbsp;
+             <b>{selectedUserName}</b>
             <DialogMessageText>{messageText}</DialogMessageText>
         </DialogMessageElement>
     );

@@ -1,5 +1,5 @@
 import {ResultCodesEnum} from "../api/api";
-import {FormAction, stopSubmit} from "redux-form";
+import {FormAction} from "redux-form";
 import {BaseThunkType, InferActionsTypes} from "./store/redux-store";
 import {authAPI} from "../api/auth-api";
 import {profileAPI} from "../api/profile-api";
@@ -42,7 +42,7 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch) => {
+    export const login = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch) => {
     let data = await authAPI.login(email, password, rememberMe);
 
     if (data.resultCode === ResultCodesEnum.Success) {
@@ -54,7 +54,7 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
 
 export const logout = (): ThunkType => async (dispatch) => {
     let data = await authAPI.logout();
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(actions.setAuthUserData(null, null, null, false, null));
     }
 }

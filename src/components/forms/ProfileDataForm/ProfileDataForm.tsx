@@ -31,7 +31,6 @@ const ProfileDataForm: FC<InjectedFormProps<ProfileType, PropsType> & PropsType>
                         <ProfileDataFormHeader>
                             Контакты
                         </ProfileDataFormHeader>
-
                         <div>
                             {Object.keys(profile.contacts).map(key => {
                                 return <FormElement key={key}>

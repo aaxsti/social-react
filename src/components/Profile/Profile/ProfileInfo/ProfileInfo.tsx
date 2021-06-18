@@ -5,9 +5,8 @@ import ProfileDataForm from "../../../forms/ProfileDataForm/ProfileDataForm";
 import {ProfileType} from "../../../../types/types";
 import {Button, Col, Row} from "antd";
 import {CloseOutlined, EditOutlined, MessageOutlined, UploadOutlined} from "@ant-design/icons";
-import {NavLink, RouteComponentProps, withRouter} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {requestFriends} from "../../../../redux/friends-reducer";
 import {selectProfileStatus} from "../../../../selectors/profile-selectors";
 import {selectUserFriendsAmount} from "../../../../selectors/friends-selectors";
 import {savePhoto, saveProfile} from "../../../../redux/profile-reducer";
@@ -17,17 +16,18 @@ import {
     AvatarImage,
     AvatarImageWrapperCol,
     FriendsAmountBlock,
-    UserName,
     FriendsAmountLink,
-    ProfileEditButton,
+    HiddenUploadInput,
+    MainInfoNameRow,
+    MainInfoRow,
     MainProfileDataFields,
     MainProfileDataFieldValues,
     ProfileButtons,
-    MainInfoNameRow,
-    MainInfoRow,
-    HiddenUploadInput
+    ProfileEditButton,
+    UserName
 } from './ProfileInfo.styled';
 import {startDialog} from "../../../../redux/dialogs-reducer";
+import {requestFriends} from "../../../../redux/friends-reducer";
 
 type PropsType = {
     isOwner: boolean
@@ -37,7 +37,7 @@ type PropsType = {
 
 const ProfileInfo: FC<PropsType> = ({isOwner, profile, userId}) => {
 
-    let [editMode, setEditMode] = useState(false);
+    let [editMode, setEditMode] = useState<boolean>(false);
 
     const status = useSelector(selectProfileStatus)
     const friendsAmount = useSelector(selectUserFriendsAmount)

@@ -10,11 +10,6 @@ import {
     AdditionalDataHeaderWrapper
 } from "./ProfileAdditionalData.styled";
 
-type ContactPropsType = {
-    contactTitle: string
-    contactValue: string
-}
-
 type ProfileAdditionalDataPropsType = {
     profile: ProfileType
 }
@@ -80,6 +75,11 @@ const ProfileAdditionalData: FC<ProfileAdditionalDataPropsType> = ({profile}) =>
             </AboutMeBlock>
         </>
     )
+}
+
+type ContactPropsType = {
+    contactTitle: string
+    contactValue: string
 }
 
 const Contact: FC<ContactPropsType> = ({contactTitle, contactValue}) => {

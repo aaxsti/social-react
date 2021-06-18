@@ -4,11 +4,9 @@ import {NavLink} from "react-router-dom";
 import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
 import {SignUpFormElement, SignUpFormWrapper } from "./SignUpForm.styled";
 
-type PropsType = {}
-
 const dateFormat = 'YYYY/MM/DD';
 
-export const SignUpForm: FC<PropsType> = () => {
+export const SignUpForm: FC = () => {
     return (
         <form>
             <Row>

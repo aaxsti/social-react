@@ -16,8 +16,8 @@ type PropsType = {
 
 const Post: React.FC<PropsType> = ({message, likesCount, date, id, profileImage, months}) => {
 
-    const [localLikesCount, setLocalLikesCount] = useState(likesCount)
-    const [isLiked, setIsLiked] = useState(false);
+    const [localLikesCount, setLocalLikesCount] = useState<number>(likesCount)
+    const [isLiked, setIsLiked] = useState<boolean>(false);
 
     let dispatch = useDispatch();
 

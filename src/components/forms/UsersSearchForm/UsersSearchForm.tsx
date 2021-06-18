@@ -20,7 +20,6 @@ type PropsType = {
 }
 
 export const UsersSearchForm: FC<PropsType> = React.memo(({onFilterChanged}) => {
-
         const filter = useSelector(getUsersFilter)
 
         const submit = (values: FormType, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {

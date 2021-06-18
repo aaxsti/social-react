@@ -11,8 +11,8 @@ type PropsType = {
 
 const ProfileStatus: FC<PropsType> = (props) => {
 
-    let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status);
+    let [editMode, setEditMode] = useState<boolean>(false);
+    let [status, setStatus] = useState<string>(props.status);
 
     const dispatch = useDispatch();
 

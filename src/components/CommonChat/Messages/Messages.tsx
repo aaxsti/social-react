@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import Message from "./Message/Message";
 import {selectChatMessages} from "../../../selectors/chat-selectors";
 import styled from "styled-components";
+import {scrollChatHelper} from "../../../utils/scroll-chat-helper";
 
 export const CommonMessages = styled.div`
   height: 500px;
@@ -16,22 +17,17 @@ export const CommonMessages = styled.div`
 const Messages: FC = () => {
     const messages = useSelector(selectChatMessages)
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
-    const [isAutoScroll, setIsAutoScroll] = useState(false)
-
-    const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        const element = e.currentTarget;
-        if (Math.abs((element.scrollHeight - element.scrollTop) - element.clientHeight) < 300) {
-            !isAutoScroll && setIsAutoScroll(true)
-        } else {
-            isAutoScroll && setIsAutoScroll(false)
-        }
-    }
+    const [isAutoScroll, setIsAutoScroll] = useState<boolean>(false)
 
     useEffect(() => {
         if (isAutoScroll) {
             messagesAnchorRef.current?.scrollIntoView({behavior: 'smooth'})
         }
     }, [messages])
+
+    const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        scrollChatHelper(e, isAutoScroll, setIsAutoScroll)
+    }
 
     return (
         <CommonMessages onScroll={scrollHandler}>

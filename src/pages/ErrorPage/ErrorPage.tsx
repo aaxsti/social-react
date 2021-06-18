@@ -9,7 +9,7 @@ const ErrorPage = () => {
             </h2>
             <img style={{width: '40px'}}
                  src={ErrorSadPic}
-                 alt='404 Error picture'
+                 alt='404 Error'
             />
         </div>
     );

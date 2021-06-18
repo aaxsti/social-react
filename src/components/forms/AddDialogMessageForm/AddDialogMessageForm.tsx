@@ -2,18 +2,20 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectDialogUser} from "../../../selectors/dialogs-selectors";
 import React, {useState} from "react";
 import {sendDialogMessage} from "../../../redux/dialogs-reducer";
-import {Button, Row} from "antd";
-import {SendOutlined} from "@ant-design/icons";
+import {Row} from "antd";
 import {AddMessageFormElement} from "../AddMessageForm/AddMessageForm.styled";
 import {AddDialogMessageFormTextArea} from "./AddDialogMessageForm.styled";
 
 const AddDialogMessageForm = () => {
     const selectedUser = useSelector(selectDialogUser)
 
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState<string>('')
     const dispatch = useDispatch()
 
-    const sendMessageHandler = () => {
+    const sendMessageHandler = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter'){
+            event.preventDefault();
+        }
         if (!message) {
             return;
         }
@@ -26,16 +28,18 @@ const AddDialogMessageForm = () => {
             <Row>
                 <AddMessageFormElement>
                     <AddDialogMessageFormTextArea
-                        autoSize={true}
+                        placeholder="Напишите сообщение..."
+                        autoSize
+                        onPressEnter={sendMessageHandler}
                         onChange={(e) => setMessage(e.currentTarget.value)}
                         value={message}>
                     </AddDialogMessageFormTextArea>
                 </AddMessageFormElement>
-                <AddMessageFormElement>
-                    <Button onClick={sendMessageHandler}>
-                        <SendOutlined/>
-                    </Button>
-                </AddMessageFormElement>
+                {/*<AddMessageFormElement>*/}
+                {/*    <Button onKeyDown={sendMessageHandler}>*/}
+                {/*        <SendOutlined/>*/}
+                {/*    </Button>*/}
+                {/*</AddMessageFormElement>*/}
             </Row>
         </form>
     );

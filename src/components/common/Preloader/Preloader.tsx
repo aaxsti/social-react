@@ -9,7 +9,7 @@ export const PreloaderWrapper = styled.div`
 
 const Preloader  = () => {
     return <PreloaderWrapper>
-        <img src={preloader} alt="Preloader picture"/>
+        <img src={preloader} alt="Preloader"/>
     </PreloaderWrapper>
 }
 

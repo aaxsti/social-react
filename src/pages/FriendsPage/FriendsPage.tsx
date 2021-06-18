@@ -10,7 +10,7 @@ import {selectUserFriends, selectUserFriendsAmount} from "../../selectors/friend
 import {FriendsPageHeader, FriendsSearchInput, SearchIcon} from "./FriendsPage.styled";
 
 const FriendsPage: FC = () => {
-    const [searchTerm, setSearchTerm] = useState('')
+    const [searchTerm, setSearchTerm] = useState<string>('')
 
     const friends = useSelector(selectUserFriends)
     const friendsAmount = useSelector(selectUserFriendsAmount)
@@ -18,7 +18,7 @@ const FriendsPage: FC = () => {
 
     useEffect(() => {
         dispatch(requestFriends());
-    }, [dispatch, friendsAmount])
+    }, [dispatch])
 
     if (!friendsAmount) {
         return <Preloader/>
@@ -47,6 +47,7 @@ const FriendsPage: FC = () => {
                             } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
                                 return val;
                             }
+                            return {};
                         })
                         .map(f => <Friend
                             friend={f}

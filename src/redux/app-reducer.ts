@@ -24,8 +24,8 @@ export const actions = {
 
 type ThunkType = ThunkAction<any, AppStateType, unknown, ActionsType>
 
-export const initializeApp = (): ThunkType => (dispatch) => {
-    let getAuthUserDataPromise = dispatch(getAuthUserData());
+export const initializeApp = (): ThunkType => async (dispatch) => {
+    let getAuthUserDataPromise = await dispatch(getAuthUserData());
 
     Promise.all([getAuthUserDataPromise])
         .then(() => {

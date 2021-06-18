@@ -4,7 +4,6 @@ import {DialogsList, DialogsListCol} from "./Dialogs.styled";
 import Dialog from "../Dialog/Dialog";
 
 const Dialogs: FC<{ dialogs: Array<DialogType> }> = ({dialogs}) => {
-
     return (
         <DialogsListCol>
             <DialogsList>

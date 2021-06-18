@@ -7,6 +7,7 @@ import {selectDialogs} from "../../selectors/dialogs-selectors";
 import {getDialogs} from "../../redux/dialogs-reducer";
 import Dialogs from "../../components/Dialogs/Dialogs/Dialogs";
 import DialogsChat from "../../components/Dialogs/DialogsChat/DialogsChat";
+import Preloader from "../../components/common/Preloader/Preloader";
 
 const DialogsPage: FC = () => {
     const dialogs = useSelector(selectDialogs);
@@ -15,6 +16,10 @@ const DialogsPage: FC = () => {
     useEffect(() => {
         dispatch(getDialogs())
     }, [dispatch]);
+
+    if (!dialogs) {
+        return <Preloader/>
+    }
 
     return (
         <div>
