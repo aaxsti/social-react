@@ -48,7 +48,7 @@ const ProfileInfo: FC<PropsType> = ({isOwner, profile, userId}) => {
 
     useEffect(() => {
         dispatch(requestFriends());
-    }, [])
+    }, [dispatch])
 
     const handleCreateDialog = () => {
         dispatch(startDialog(userId))

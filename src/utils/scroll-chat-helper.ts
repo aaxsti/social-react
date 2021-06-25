@@ -1,4 +1,4 @@
-import React from "react";
+import React, {RefObject} from "react";
 
 export const scrollChatHelper = (
     e: React.UIEvent<HTMLDivElement, UIEvent>,
@@ -11,4 +11,13 @@ export const scrollChatHelper = (
     } else {
         isAutoScroll && setIsAutoScroll(false)
     }
+}
+
+export const autoScrollHelper = (e: RefObject<HTMLDivElement>, isAutoScroll: boolean) => {
+    const element = e.current;
+    element?.scrollIntoView({behavior: 'smooth'})
+    if (isAutoScroll) {
+        element?.scrollIntoView({behavior: 'smooth'})
+    }
+    window.scrollTo(0,0)
 }

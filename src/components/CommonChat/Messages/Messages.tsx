@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import Message from "./Message/Message";
 import {selectChatMessages} from "../../../selectors/chat-selectors";
 import styled from "styled-components";
-import {scrollChatHelper} from "../../../utils/scroll-chat-helper";
+import {autoScrollHelper, scrollChatHelper} from "../../../utils/scroll-chat-helper";
 
 export const CommonMessages = styled.div`
   height: 500px;
@@ -20,10 +20,8 @@ const Messages: FC = () => {
     const [isAutoScroll, setIsAutoScroll] = useState<boolean>(false)
 
     useEffect(() => {
-        if (isAutoScroll) {
-            messagesAnchorRef.current?.scrollIntoView({behavior: 'smooth'})
-        }
-    }, [messages])
+        autoScrollHelper(messagesAnchorRef, isAutoScroll)
+    }, [messages]) // eslint-disable-line
 
     const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
         scrollChatHelper(e, isAutoScroll, setIsAutoScroll)

@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import {useDispatch} from "react-redux";
 import {getDialogMessages} from "../../../redux/dialogs-reducer";
 import {DialogDate, DialogItem, DialogItemInfo, DialogItemRight} from "./Dialog.styled";
@@ -15,14 +15,15 @@ type PropsType = {
 }
 
 const Dialog: FC<PropsType> = ({
+                                   hasNewMessage,
                                    photo,
                                    userName,
                                    lastUserActivityDate,
                                    newMessagesCount,
                                    userId
                                }) => {
-
     const dispatch = useDispatch();
+    const [selectedDialog, setSelectedDialog] = useState<"1" | "0">("0")
 
     const formattedDate = lastUserActivityDate
             .substr(5, 5)
@@ -30,11 +31,15 @@ const Dialog: FC<PropsType> = ({
         + lastUserActivityDate.substr(11, 5);
 
     const handleSelect = () => {
+        setSelectedDialog("1")
         dispatch(getDialogMessages(userId))
     }
 
     return (
-        <DialogItem onClick={handleSelect}>
+        <DialogItem
+            hasnewmessage={hasNewMessage}
+            selecteddialog={selectedDialog}
+            onClick={handleSelect}>
             <Col>
                 <Avatar size={'large'} src={photo}/>
             </Col>
@@ -43,7 +48,7 @@ const Dialog: FC<PropsType> = ({
                 <DialogDate>{formattedDate}</DialogDate>
             </DialogItemInfo>
             <DialogItemRight>
-                <span>{newMessagesCount} </span>
+                <span>{newMessagesCount !== 0 && newMessagesCount} </span>
                 <CloseCircleOutlined/>
             </DialogItemRight>
         </DialogItem>

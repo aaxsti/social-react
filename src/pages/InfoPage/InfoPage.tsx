@@ -7,9 +7,9 @@ const InfoPage = () => {
             <img alt='App info'
             src={AppInfoPic}
                  style={{width: '100%'}}/>
-            <p style={{textAlign: 'center'}}>
-                Разработанное приложение использует данные Social Network API.
-            </p>
+            <h3 style={{textAlign: 'center', paddingTop: 40}}>
+                Разработанное приложение использует данные Social Network API
+            </h3>
         </div>
     );
 }

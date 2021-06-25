@@ -12,17 +12,18 @@ export const DialogItemInfo = styled(Col)`
   padding-left: 20px;
 `
 
-export const DialogItem = styled(Row)`
+export const DialogItem = styled(Row)<{ hasnewmessage: boolean, selecteddialog: string}>`
+  background-color: ${props => (props.selecteddialog === "1" && "#ebedee")};
+  background-color: ${props => (props.hasnewmessage && "#e6eff7")};
   width: 300px;
   padding: 10px;
-  transition: 0.3s;
-  &:hover {
-    opacity: 1;
-    background-color: #ebedee;
-  }
-  &:focus {
-    background-color: #ebedee;
-  }
+  //transition: 0.2s;
+
+  //&:hover {
+  //  opacity: 1;
+  //  background-color: #ebedee;
+  //}
+
   cursor: pointer;
   border-bottom: 1px #eef0f0 solid;
 `

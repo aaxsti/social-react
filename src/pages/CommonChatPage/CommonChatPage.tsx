@@ -9,6 +9,7 @@ import {startMessagesListening, stopMessagesListening} from "../../redux/chat-re
 import styled from "styled-components";
 
 export const CommonChatMain = styled.div`
+  margin-top: 30px;
   margin-left: 150px;
 `
 
@@ -26,7 +27,6 @@ const CommonChatPage = () => {
     return (
         <div>
             <h2><WechatOutlined/> Общий чат</h2>
-
             <CommonChatMain>
                 {status === 'error' && <div>Some error occurred. Please refresh the page</div>}
                 <Messages/>

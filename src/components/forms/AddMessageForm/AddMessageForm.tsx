@@ -34,9 +34,6 @@ const AddMessageForm: FC = () => {
                     disabled={status !== 'ready'}>
                 </AddMessageFormTextArea>
             </AddMessageFormElement>
-            {/*<AddMessageFormElement>*/}
-            {/*    <Button disabled={status !== 'ready'} onClick={sendMessageHandler}><SendOutlined/></Button>*/}
-            {/*</AddMessageFormElement>*/}
         </Row>
     )
 }

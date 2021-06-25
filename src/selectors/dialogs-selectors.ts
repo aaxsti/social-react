@@ -1,6 +1,6 @@
 import {AppStateType} from "../redux/store/redux-store";
 import { createSelector } from 'reselect'
-import {selectAuthorizedUserId} from "./auth-selectors";
+import {selectAuthorizedUserAvatar, selectAuthorizedUserId} from "./auth-selectors";
 
 const dialogsPage = (state: AppStateType) => state.dialogsPage
 
@@ -14,15 +14,16 @@ export const selectDialogMessages = createSelector(
     dialogsPage => dialogsPage.messages
 )
 
-export const selectDialogUser = createSelector(
+export const selectDialogUserId = createSelector(
     [dialogsPage],
-    dialogsPage => dialogsPage.selectedUser
+    dialogsPage => dialogsPage.selectedUserId
 )
 
-export const selectUserName = (senderId: number) => createSelector(
-    [selectDialogs, selectAuthorizedUserId],
-    (selectDialogs, userId) => {
-        if (senderId === userId) return "Вы"
-        else return selectDialogs.find((dialog) => dialog.id === senderId)?.userName
+export const selectDialogUserData = (senderId: number) => createSelector(
+    [selectDialogs, selectAuthorizedUserId, selectAuthorizedUserAvatar],
+    (selectDialogs, userId, avatar) => {
+        const findSenderUser = selectDialogs.find((dialog) => dialog.id === senderId)
+        if (senderId === userId) return ['Вы', avatar]
+        return [findSenderUser?.userName, findSenderUser?.photos.small]
     }
 )

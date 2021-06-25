@@ -64,8 +64,7 @@ const ProfileDataForm: FC<InjectedFormProps<ProfileType, PropsType> & PropsType>
                             {createField<ProfileTypeKeys>("О себе...", "aboutMe", [maxLength300], Textarea)}
                         </FormElement>
 
-                            <SaveFormButton htmlType={'submit'} onClick={() => {
-                            }}><SaveOutlined/> Сохранить</SaveFormButton>
+                            <SaveFormButton htmlType={'submit'}><SaveOutlined/> Сохранить</SaveFormButton>
 
                         {error &&
                         <div>

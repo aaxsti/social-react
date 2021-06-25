@@ -102,12 +102,12 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch,
     if (data.resultCode === ResultCodesEnum.Success) {
         if (userId != null) {
             dispatch(await getUserProfile(userId))
+            toast.success('Данные профиля обновлены')
         } else {
             toast.info('userId can`t be null')
         }
     } else {
         toast.info(data.messages[0])
-        return Promise.reject(data.messages[0])
     }
 }
 

@@ -17,7 +17,7 @@ const DialogsPage: FC = () => {
         dispatch(getDialogs())
     }, [dispatch]);
 
-    if (!dialogs) {
+    if (dialogs.length === 0) {
         return <Preloader/>
     }
 

@@ -1,10 +1,20 @@
+type MessagesReceivedSubscriberType = (messages: ChatMessageAPIType[]) => void
+type StatusChangedSubscriberType = (status: StatusType) => void
+export type StatusType = 'pending' | 'ready' | 'error';
+export type ChatMessageAPIType = {
+    message: string
+    photo: string
+    userId: number
+    userName: string
+}
+type EventsNamesType = 'messages-received' | 'status-changed'
+
 const subscribers = {
     'messages-received': [] as MessagesReceivedSubscriberType[],
     'status-changed': [] as StatusChangedSubscriberType[]
 }
 
 let ws: WebSocket | null = null
-type EventsNamesType = 'messages-received' | 'status-changed'
 
 const closeHandler = () => {
     notifySubscribersAboutStatus('pending')
@@ -22,7 +32,6 @@ const openHandler = () => {
 
 const errorHandler = () => {
     notifySubscribersAboutStatus('error')
-    console.error('REFRESH PAGE')
 };
 
 const cleanUp = () => {
@@ -72,15 +81,4 @@ export const chatAPI = {
     sendMessage(message: string) {
         ws?.send(message)
     }
-}
-
-type MessagesReceivedSubscriberType = (messages: ChatMessageAPIType[]) => void
-type StatusChangedSubscriberType = (status: StatusType) => void
-
-export type StatusType = 'pending' | 'ready' | 'error';
-export type ChatMessageAPIType = {
-    message: string
-    photo: string
-    userId: number
-    userName: string
 }

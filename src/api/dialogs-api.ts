@@ -18,4 +18,7 @@ export const dialogsAPI = {
         return instance.post(`dialogs/${userId}/messages`, {body}).then(res => res.data);
     },
 
+    deleteDialogMessage(messageId: string) {
+        return instance.delete(`dialogs/messages/${messageId}`).then(res => res.data);
+    },
 };

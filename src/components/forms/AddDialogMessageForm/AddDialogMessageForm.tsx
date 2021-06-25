@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {selectDialogUser} from "../../../selectors/dialogs-selectors";
+import {selectDialogUserId} from "../../../selectors/dialogs-selectors";
 import React, {useState} from "react";
 import {sendDialogMessage} from "../../../redux/dialogs-reducer";
 import {Row} from "antd";
@@ -7,7 +7,7 @@ import {AddMessageFormElement} from "../AddMessageForm/AddMessageForm.styled";
 import {AddDialogMessageFormTextArea} from "./AddDialogMessageForm.styled";
 
 const AddDialogMessageForm = () => {
-    const selectedUser = useSelector(selectDialogUser)
+    const selectedUserId = useSelector(selectDialogUserId)
 
     const [message, setMessage] = useState<string>('')
     const dispatch = useDispatch()
@@ -19,7 +19,7 @@ const AddDialogMessageForm = () => {
         if (!message) {
             return;
         }
-        dispatch(sendDialogMessage(selectedUser, message))
+        dispatch(sendDialogMessage(selectedUserId, message))
         setMessage('')
     }
 

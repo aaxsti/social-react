@@ -22,8 +22,6 @@ export const actions = {
     initializedSuccess: () => ({type: 'SN/APP/INITIALIZED_SUCCESS'} as const)
 }
 
-type ThunkType = ThunkAction<any, AppStateType, unknown, ActionsType>
-
 export const initializeApp = (): ThunkType => async (dispatch) => {
     let getAuthUserDataPromise = await dispatch(getAuthUserData());
 
@@ -35,5 +33,6 @@ export const initializeApp = (): ThunkType => async (dispatch) => {
 
 export default appReducer;
 
+type ThunkType = ThunkAction<any, AppStateType, unknown, ActionsType>
 export type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>
