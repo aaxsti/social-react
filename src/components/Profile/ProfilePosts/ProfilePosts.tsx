@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import Post from "./Post/Post";
 import AddNewPostForm, {AddPostFormValuesType} from "../../forms/AddNewPostForm/AddNewPostForm";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,7 +16,7 @@ const ProfilePosts: FC = () => {
 
     const dispatch = useDispatch()
 
-    let postsElements = posts.reverse()
+    let postsElements = posts
         .map((p) => <Post
             months={months}
             profileImage={profileImage}
@@ -25,7 +25,7 @@ const ProfilePosts: FC = () => {
             id={p.id}
             likesCount={p.likesCount}
             date={p.date}
-        />);
+        />).reverse();
 
     let addNewPost = (values: AddPostFormValuesType) => {
         dispatch(actions.addPostActionCreator(values.newPostText));

@@ -50,8 +50,8 @@ export const getDialogs = (): ThunkType => async (dispatch) => {
 
 export const getDialogMessages = (userId: number): ThunkType => async (dispatch) => {
     let data = await dialogsAPI.getDialogMessages(userId);
+    dispatch(actions.setSelectedUser(userId));
     dispatch(actions.setDialogMessages(data.items));
-    dispatch(actions.setSelectedUser(userId))
 }
 
 export const sendDialogMessage = (userId: number, body: string): ThunkType => async (dispatch) => {

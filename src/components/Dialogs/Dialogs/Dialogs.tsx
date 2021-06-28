@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC} from "react";
 import {DialogType} from "../../../types/types";
 import {DialogsList, DialogsListCol} from "./Dialogs.styled";
 import Dialog from "../Dialog/Dialog";

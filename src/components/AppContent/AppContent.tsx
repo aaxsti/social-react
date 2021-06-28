@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Redirect, Route, RouteComponentProps, Switch, withRouter} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {SignUpPage} from "../../pages/SignUpPage/SignUpPage";
 import {BackTop} from "antd";
 import withSuspense from "../../hoc/withSuspense";
@@ -22,6 +22,8 @@ const SuspendedFriendsPage = withSuspense(FriendsPage)
 const SuspendedInfoPage = withSuspense(InfoPage)
 const SuspendedCommonChatPage = withSuspense(CommonChatPage)
 const SuspendedDialogsPage = withSuspense(DialogsPage)
+
+type PropsType = {}
 
 const AppContent: FC<PropsType> = () => {
     return (
@@ -47,7 +49,5 @@ const AppContent: FC<PropsType> = () => {
         </AppContentWrapper>
     );
 }
-
-type PropsType = RouteComponentProps & {}
 
 export default React.memo(withRouter(AppContent));

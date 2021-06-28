@@ -17,13 +17,6 @@ export const DialogItem = styled(Row)<{ hasnewmessage: boolean, selecteddialog: 
   background-color: ${props => (props.hasnewmessage && "#e6eff7")};
   width: 300px;
   padding: 10px;
-  //transition: 0.2s;
-
-  //&:hover {
-  //  opacity: 1;
-  //  background-color: #ebedee;
-  //}
-
   cursor: pointer;
   border-bottom: 1px #eef0f0 solid;
 `

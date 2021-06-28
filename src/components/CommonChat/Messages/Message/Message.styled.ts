@@ -15,6 +15,8 @@ export const MessageUserName = styled.b`
   padding-left: 7px;
 `
 
-export const MessageText = styled.span`
-  padding-left: 5px;
+export const MessageText = styled.p`
+  margin: 0;
+  padding: 0 0 0 5px;
+  word-wrap: break-word;
 `

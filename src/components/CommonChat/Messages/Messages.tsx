@@ -17,7 +17,7 @@ export const CommonMessages = styled.div`
 const Messages: FC = () => {
     const messages = useSelector(selectChatMessages)
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
-    const [isAutoScroll, setIsAutoScroll] = useState<boolean>(false)
+    const [isAutoScroll, setIsAutoScroll] = useState<boolean>(true)
 
     useEffect(() => {
         autoScrollHelper(messagesAnchorRef, isAutoScroll)
@@ -29,7 +29,7 @@ const Messages: FC = () => {
 
     return (
         <CommonMessages onScroll={scrollHandler}>
-            {messages.map((m) => <Message key={m.id} message={m}/>)}
+            {messages.map((m) => <Message key={m.id} message={m} userId={m.userId}/>)}
             <div ref={messagesAnchorRef}>
 
             </div>

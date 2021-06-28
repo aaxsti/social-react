@@ -6,7 +6,7 @@ export const scrollChatHelper = (
     setIsAutoScroll: (bool: boolean) => void) => {
 
     const element = e.currentTarget;
-    if (Math.abs((element.scrollHeight - element.scrollTop) - element.clientHeight) < 300) {
+    if (Math.abs((element.scrollHeight - element.scrollTop) - element.clientHeight) < 70) {
         !isAutoScroll && setIsAutoScroll(true)
     } else {
         isAutoScroll && setIsAutoScroll(false)
@@ -15,8 +15,7 @@ export const scrollChatHelper = (
 
 export const autoScrollHelper = (e: RefObject<HTMLDivElement>, isAutoScroll: boolean) => {
     const element = e.current;
-    element?.scrollIntoView({behavior: 'smooth'})
-    if (isAutoScroll) {
+    if (isAutoScroll || ((element!?.scrollHeight - element!?.scrollTop - element!?.clientHeight) < 70)) {
         element?.scrollIntoView({behavior: 'smooth'})
     }
     window.scrollTo(0,0)

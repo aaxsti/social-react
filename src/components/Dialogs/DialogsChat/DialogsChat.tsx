@@ -1,41 +1,44 @@
 import {useDispatch, useSelector} from "react-redux";
 import {selectDialogMessages, selectDialogUserId} from "../../../selectors/dialogs-selectors";
 import {DialogChatWindow, DialogMessagesBlock, NoDialogHeader} from "./DialogsChat.styled";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import DialogMessage from "./DialogMessage/DialogMessage";
 import AddDialogMessageForm from "../../forms/AddDialogMessageForm/AddDialogMessageForm";
-import {autoScrollHelper, scrollChatHelper} from "../../../utils/scroll-chat-helper";
+import {autoScrollHelper} from "../../../utils/scroll-chat-helper";
 import {getDialogMessages} from "../../../redux/dialogs-reducer";
 
 const DialogsChat = () => {
     const messages = useSelector(selectDialogMessages)
-    const [isAutoScroll, setIsAutoScroll] = useState<boolean>(false)
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
     const selectedUserId = useSelector(selectDialogUserId)
+
     const dispatch = useDispatch()
 
     useEffect(() => {
-        autoScrollHelper(messagesAnchorRef, isAutoScroll)
-    }, [messages])
+        messagesAnchorRef?.current?.scrollIntoView({behavior: 'smooth'})
+    }, []);
+
+    useEffect(() => {
+        autoScrollHelper(messagesAnchorRef, false)
+    }, [messages])  // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         let refresh = null as any
         if (selectedUserId !== 0) {
-            refresh = setInterval(() =>  {console.log(selectedUserId, messages); dispatch(getDialogMessages(selectedUserId))}, 3000)
+            refresh = setInterval(() => {
+                dispatch(getDialogMessages(selectedUserId))
+            }, 5000)
         }
         if (refresh !== null) return () => clearInterval(refresh)
-    }, [dispatch, selectedUserId]);
-
-    const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        scrollChatHelper(e, isAutoScroll, setIsAutoScroll)
-    }
+    }, [dispatch, selectedUserId, messages]);
 
     return (
         <>
             <DialogMessagesBlock>
+                <h2>{}</h2>
                 {!!selectedUserId ?
                     <>
-                        <DialogChatWindow onScroll={scrollHandler}>
+                        <DialogChatWindow>
                             {messages.length !== 0 ?
                                 messages.map(m => <DialogMessage
                                     key={m.id}
@@ -43,6 +46,7 @@ const DialogsChat = () => {
                                     messageText={m.body}
                                     senderId={m.senderId}
                                     viewed={m.viewed}
+                                    addedAt={m.addedAt}
                                 />) : <NoDialogHeader>Нет сообщений</NoDialogHeader>
                             }
                             <div ref={messagesAnchorRef}>

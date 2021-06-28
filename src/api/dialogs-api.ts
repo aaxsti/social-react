@@ -11,7 +11,7 @@ export const dialogsAPI = {
     },
 
     getDialogMessages(userId: number) {
-        return instance.get<GetItemsType<DialogMessageType>>(`dialogs/${userId}/messages`).then(res => res.data);
+        return instance.get<GetItemsType<DialogMessageType>>(`dialogs/${userId}/messages?count=20`).then(res => res.data);
     },
 
     sendDialogMessage(userId: number, body: string) {
@@ -20,5 +20,5 @@ export const dialogsAPI = {
 
     deleteDialogMessage(messageId: string) {
         return instance.delete(`dialogs/messages/${messageId}`).then(res => res.data);
-    },
+    }
 };

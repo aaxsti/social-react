@@ -15,7 +15,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const App: FC = () => {
     const initialized = useSelector(selectInitialized)
-
     const dispatch = useDispatch()
 
     useEffect(() => {

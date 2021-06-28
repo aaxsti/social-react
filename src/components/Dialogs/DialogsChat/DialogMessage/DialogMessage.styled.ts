@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {CloseCircleOutlined} from "@ant-design/icons";
 
 export const DialogMessageElement = styled.div<{ viewed: boolean }>`
   background-color: ${props => (!props.viewed && "#e6eff7")};
@@ -13,9 +12,9 @@ export const DialogMessageText = styled.p`
   word-wrap: break-word
 `
 
-export const DeleteMessageButton = styled(CloseCircleOutlined)`
+export const RightMessageElements = styled.div`
   color: gray;
-  font-size: 18px;
+  font-size: 14px;
   float: right;
   padding-right: 10px;
 `

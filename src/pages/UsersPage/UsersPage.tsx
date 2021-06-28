@@ -54,7 +54,7 @@ const UsersPage: FC<PropsType> = () => {
         }
 
         dispatch(requestUsers(actualPage, pageSize, actualFilter));
-    }, [])
+    }, [dispatch, pageSize]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const query: QueryParamsType = {}
@@ -66,7 +66,7 @@ const UsersPage: FC<PropsType> = () => {
             pathname: '/users',
             search: queryString.stringify(query)
         })
-    }, [filter, currentPage])
+    }, [filter, currentPage, history])
 
     if (!totalUsersCount) {
         return <Preloader/>
@@ -90,7 +90,7 @@ const UsersPage: FC<PropsType> = () => {
 
     return (
         <UsersPageWrapper>
-            <h2><UserOutlined/> Пользователи ({totalUsersCount})</h2>
+            <h2><UserOutlined/> Пользователи [{totalUsersCount}]</h2>
 
             <UsersSearchForm onFilterChanged={onFilterChanged}/>
 

@@ -88,11 +88,13 @@ export const updateStatus = (status: string): ThunkType => async (dispatch) => {
 export const savePhoto = (file: File): ThunkType => async (dispatch) => {
     try {
         let data = await profileAPI.savePhoto(file);
-        if (data.resultCode === ResultCodesEnum.Success) {
+        if (data.messages.length === 0) {
             dispatch(actions.savePhotoSuccess(data.data.photos));
+        } else {
+            toast.info("Отправленные данные некорректны")
         }
     } catch (error) {
-        toast.info("Отправленные данные некорректны")
+        toast.info("Ошибка загрузки фото")
     }
 }
 

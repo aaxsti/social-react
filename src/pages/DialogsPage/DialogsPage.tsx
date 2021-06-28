@@ -24,6 +24,7 @@ const DialogsPage: FC = () => {
     return (
         <div>
             <h2><MessageOutlined/> Мессенджер</h2>
+            <br/>
             <Row>
                 <Dialogs dialogs={dialogs}/>
                 <DialogsChat/>

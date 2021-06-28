@@ -27,7 +27,7 @@ const FriendsPage: FC = () => {
     return (
         <div>
             <FriendsPageHeader>
-                <HeartOutlined/> Мои друзья ({friendsAmount})
+                <HeartOutlined/> Мои друзья [{friendsAmount}]
             </FriendsPageHeader>
             <div>
                 <FriendsSearchInput

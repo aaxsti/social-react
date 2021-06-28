@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getStatus, getUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -9,6 +9,7 @@ import ProfilePosts from "../../components/Profile/ProfilePosts/ProfilePosts";
 import {selectProfile} from "../../selectors/profile-selectors";
 import Preloader from "../../components/common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import { toast } from 'react-toastify';
 
 const ProfilePageWrapper = styled.div`
   width: 100%;
@@ -26,7 +27,7 @@ export const ProfilePage: FC<PropsType> = ({history, match}) => {
 
     const dispatch = useDispatch()
 
-    const refreshProfile = () => {
+    const refreshProfile = useCallback(() => {
         let userId: number | null = +match.params.userId;
 
         if (!userId) {
@@ -36,16 +37,16 @@ export const ProfilePage: FC<PropsType> = ({history, match}) => {
             }
         }
         if (!userId) {
-            console.error("Id should exists in URI params or in state ('authorizedUserId')")
+            toast.info("Id should exists in URI params or in state ('authorizedUserId')")
         } else {
             dispatch(getUserProfile(userId));
             dispatch(getStatus(userId));
         }
-    }
+    }, [authorizedUserId, match.params.userId, history, dispatch])
 
     useEffect(() => {
         refreshProfile();
-    }, [match.params.userId]);
+    }, [match.params.userId, refreshProfile]);
 
     if (!profile) {
         return <Preloader/>

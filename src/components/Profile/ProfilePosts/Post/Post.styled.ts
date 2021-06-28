@@ -12,6 +12,12 @@ export const PostBlock = styled.div`
 export const DeletePostButton = styled(CloseCircleOutlined)`
   float: right;
   font-size: 20px;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 1;
+    color: #000;
+  }
 `
 
 export const PostInfo = styled(Col)`
@@ -30,5 +36,6 @@ export const PostText = styled.p`
 `
 
 export const PostActionsBlock = styled.div`
+  color: gray;
   font-size: 16px;
 `

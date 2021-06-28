@@ -4,6 +4,8 @@ import {getDialogMessages} from "../../../redux/dialogs-reducer";
 import {DialogDate, DialogItem, DialogItemInfo, DialogItemRight} from "./Dialog.styled";
 import {Avatar, Col} from "antd";
 import {CloseCircleOutlined} from "@ant-design/icons";
+import {NavLink} from "react-router-dom";
+import {formatDate} from "../../../utils/format-date";
 
 type PropsType = {
     hasNewMessage: boolean
@@ -25,11 +27,6 @@ const Dialog: FC<PropsType> = ({
     const dispatch = useDispatch();
     const [selectedDialog, setSelectedDialog] = useState<"1" | "0">("0")
 
-    const formattedDate = lastUserActivityDate
-            .substr(5, 5)
-            .split('-').join('.') + ' в '
-        + lastUserActivityDate.substr(11, 5);
-
     const handleSelect = () => {
         setSelectedDialog("1")
         dispatch(getDialogMessages(userId))
@@ -41,11 +38,13 @@ const Dialog: FC<PropsType> = ({
             selecteddialog={selectedDialog}
             onClick={handleSelect}>
             <Col>
-                <Avatar size={'large'} src={photo}/>
+                <NavLink to={'/profile/' + userId}>
+                    <Avatar size={'large'} src={photo}/>
+                </NavLink>
             </Col>
             <DialogItemInfo>
                 <span>{userName}</span>
-                <DialogDate>{formattedDate}</DialogDate>
+                <DialogDate>{formatDate(lastUserActivityDate)}</DialogDate>
             </DialogItemInfo>
             <DialogItemRight>
                 <span>{newMessagesCount !== 0 && newMessagesCount} </span>

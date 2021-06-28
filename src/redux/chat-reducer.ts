@@ -47,6 +47,7 @@ export const actions = {
 }
 
 let _newMessageHandler: ((messages: ChatMessageAPIType[]) => void) | null = null
+
 const newMessageHandlerCreator = (dispatch: Dispatch) => {
     if (_newMessageHandler === null) {
         _newMessageHandler = (messages) => {
@@ -57,6 +58,7 @@ const newMessageHandlerCreator = (dispatch: Dispatch) => {
 }
 
 let _statusChangedHandler: ((status: StatusType) => void) | null = null
+
 const statusChangedHandlerCreator = (dispatch: Dispatch) => {
     if (_statusChangedHandler === null) {
         _statusChangedHandler = (status) => {
